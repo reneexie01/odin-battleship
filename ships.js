@@ -40,13 +40,27 @@ const battleShip = (function() {
         return 'Invalid direction received';
     }
 
-    const boardLocation = (positionRow, positionColumn, length, direction) => { // How to handle validation of positions
+    const boardLocation = (positionRow, positionColumn, length, direction) => { // TODO: How to handle validation of new coordinates
         let boardCoordinates = [];
-        const position = [positionRow, positionColumn]
-        boardCoordinates.push(position)
+        const position = positionValidation(positionRow, positionColumn)
         if (direction === 'left') {
             for (let i = 0; i < length; i++) {
-                const newCoordinates = [position[0], (position[0] - i)]
+                const newCoordinates = [position[0], (position[1] - i)]
+                boardCoordinates.push(newCoordinates);
+            }
+        } else if (direction === 'right') {
+            for (let i = 0; i < length; i++) {
+                const newCoordinates = [position[0], (position[1] + i)]
+                boardCoordinates.push(newCoordinates);
+            }
+        } else if (direction === 'up') {
+            for (let i = 0; i < length; i++) {
+                const newCoordinates = [(position[0] - i), position[1]]
+                boardCoordinates.push(newCoordinates);
+            }
+        } else if (direction === 'down') {
+            for (let i = 0; i < length; i++) {
+                const newCoordinates = [(position[0] + i), position[1]]
                 boardCoordinates.push(newCoordinates);
             }
         }

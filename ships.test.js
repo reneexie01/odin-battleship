@@ -23,3 +23,19 @@ test('Battleship Factory with length 2 has been sunk after 2 hits', () => {
 test('Battleship Factory accepts a position', () => {
     expect(battleShip.ship(2, 0, false, 2, 2, 'left').direction).toBe('left');
 })
+
+test('Battleship Factory generates coordinates from position and left direction', () => {
+    expect(battleShip.ship(2, 0, false, 2, 4, 'left').boardLocation).toEqual([[2,4],[2,3]]);
+})
+
+test('Battleship Factory generates coordinates from position and right direction', () => {
+    expect(battleShip.ship(3, 0, false, 2, 4, 'right').boardLocation).toEqual([[2,4],[2,5],[2,6]]);
+})
+
+test('Battleship Factory generates coordinates from position and up direction', () => {
+    expect(battleShip.ship(2, 0, false, 3, 4, 'up').boardLocation).toEqual([[3,4],[2,4]]);
+})
+
+test('Battleship Factory generates coordinates from position and down direction', () => {
+    expect(battleShip.ship(3, 0, false, 3, 4, 'down').boardLocation).toEqual([[3,4],[4,4],[5,4]]);
+})
