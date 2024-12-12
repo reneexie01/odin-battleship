@@ -39,3 +39,7 @@ test('Battleship Factory generates coordinates from position and up direction', 
 test('Battleship Factory generates coordinates from position and down direction', () => {
     expect(battleShip.ship(3, 0, false, 3, 4, 'down').boardLocation).toEqual([[3,4],[4,4],[5,4]]);
 })
+
+test('Battleship Factory rejects generated coordinates that are out of bounds', () => {
+    expect(battleShip.ship(6, 0, false, 3, 3, 'left').boardLocation).toEqual('Battleship is outside of bounds'); //TODO: Write the code for this test
+})
