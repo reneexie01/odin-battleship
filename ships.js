@@ -1,9 +1,7 @@
-const battleShip = (function() {
-    const ship = (length, hitCount = 0, sunk = false, positionRow, positionColumn, direction) => {
+const BattleShip = (function() {
+    const ship = (length, positionRow, positionColumn, direction, hitCount = 0, sunk = false) => {
         return {
             length: length,
-            hitCount: hitCount,
-            sunk: sunk,
             hit() {
                 if(!this.sunk) {
                     this.hitCount++;
@@ -18,7 +16,9 @@ const battleShip = (function() {
             },
             position: positionValidation(positionRow, positionColumn),
             direction: directionValidation(direction),
-            boardLocation: boardLocation(positionRow, positionColumn, length, direction) // TODO: Do we need an array for all coordinates like boardLocation?
+            boardLocation: boardLocation(positionRow, positionColumn, length, direction), // TODO: Do we need an array for all coordinates like boardLocation?
+            hitCount: hitCount,
+            sunk: sunk,
         }
     }
 
@@ -90,4 +90,4 @@ const battleShip = (function() {
 
 })()
 
-export { battleShip };
+export { BattleShip };
