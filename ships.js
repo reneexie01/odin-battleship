@@ -90,4 +90,4 @@ const battleShip = (function() {
 
 })()
 
-module.exports = { battleShip };
+export { battleShip };

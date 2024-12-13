@@ -1,4 +1,4 @@
-const { battleShip } = require('./ships');
+import { battleShip } from './ships';
 
 test('Battleship Factory exists', () => {
     expect(battleShip.ship(4, 0, false, 2, 2, 'left')).toBeDefined();
@@ -41,5 +41,5 @@ test('Battleship Factory generates coordinates from position and down direction'
 })
 
 test('Battleship Factory rejects generated coordinates that are out of bounds', () => {
-    expect(battleShip.ship(6, 0, false, 3, 3, 'left').boardLocation).toEqual('Battleship is outside of bounds'); //TODO: Write the code for this test
+    expect(battleShip.ship(6, 0, false, 3, 3, 'left').boardLocation).toEqual('Battleship is outside of bounds');
 })
