@@ -86,7 +86,7 @@ const BattleShip = (function() {
         }
     }
 
-    return { ship }
+    return { ship, positionValidation }
 
 })()
 
