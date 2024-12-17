@@ -50,7 +50,7 @@ const BattleShip = (function() {
                 shipStatus = false;
             }
         })
-        return shipStatus
+        return shipStatus;
     }
 
     const shipValidity = (positionRow, positionColumn, length, direction, shipStatus) => { // TODO: Consider removing this - redundant code
@@ -77,8 +77,8 @@ const BattleShip = (function() {
                 boardCoordinates.push(newCoordinates);
             }
         }
-        shipStatus = coordinatesValidation(boardCoordinates, shipStatus);
-        return shipStatus
+        shipStatus = coordinatesValidation(boardCoordinates, shipStatus)
+        return { shipStatus: shipStatus, coordinates: boardCoordinates }
         /*
         if (!shipStatus) {
             return 'Battleship is outside of bounds';

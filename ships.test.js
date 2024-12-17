@@ -25,5 +25,5 @@ test('Battleship Factory accepts a position', () => {
 })
 
 test('Battleship Factory rejects generated coordinates that are out of bounds', () => {
-    expect(BattleShip.ship(6, 3, 3, 'left').shipValidity).toEqual(false);
+    expect(BattleShip.ship(6, 3, 3, 'left').shipValidity.shipStatus).toEqual(false);
 })

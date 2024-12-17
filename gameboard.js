@@ -31,9 +31,11 @@ const Gameboard = (function() {
         return BattleShip.ship(3, positionRow, positionColumn, direction);
     }
 
-    const generateDestroyer = (positionRow, positionColumn, direction) => { // TODO: Validate if the position has been taken already and if new coordinates are valid.
+    const generateDestroyer = (positionRow, positionColumn, direction) => { // TODO: Validate if the position has been taken already. Also reduce the double up of code here.
         let shipStatus = true;
-        shipStatus = BattleShip.shipValidity(positionRow, positionColumn, 2, direction, shipStatus)
+        shipStatus = BattleShip.shipValidity(positionRow, positionColumn, 2, direction, shipStatus).shipStatus;
+        const coordinates = BattleShip.shipValidity(positionRow, positionColumn, 2, direction, shipStatus).coordinates;
+        console.log(coordinates)
         if (!shipStatus) {
             return 'Battleship is outside of bounds';
         } else {
@@ -65,6 +67,22 @@ const Gameboard = (function() {
         }
         return shipStatus;
     }
+
+    const isOccupied = (playerBoard, coordinates) => {
+        let isOccupied = false;
+        let gameboardCoordinates = [];
+        coordinates.forEach((coordinate) => {
+            gameboardCoordinates.push(playerBoard[coordinate[0]][coordinate[1]]);
+        })
+        let blankCoodinates = [];
+        for (let i = 0; i < gameboardCoordinates.length; i++) {
+            blankCoodinates.push(null);
+        }
+        if (JSON.stringify(gameboardCoordinates) !== JSON.stringify(blankCoodinates)) {
+            isOccupied = true;
+        }
+        return isOccupied;
+    } // TODO: Need to add this into the generate function
 
     return { generateGameboard, playerBoard, opponentBoard, generateCarrier, generateDestroyer }
 
