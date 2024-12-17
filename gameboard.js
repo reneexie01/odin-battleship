@@ -15,7 +15,7 @@ const Gameboard = (function() {
     const playerBoard = generateGameboard();
     const opponentBoard = generateGameboard();
 
-    const generateCarrier = (positionRow, positionColumn, direction) => { // TODO: Push coordinates to the gameboard and check if coordinates exist
+    const generateCarrier = (positionRow, positionColumn, direction) => { 
         return BattleShip.ship(5, positionRow, positionColumn, direction);
     }
 
@@ -31,17 +31,39 @@ const Gameboard = (function() {
         return BattleShip.ship(3, positionRow, positionColumn, direction);
     }
 
-    const generateDestroyer = (positionRow, positionColumn, direction) => {
+    const generateDestroyer = (positionRow, positionColumn, direction) => { // TODO: Validate if the position has been taken already and if new coordinates are valid.
         let shipStatus = true;
-        const position = BattleShip.positionValidation(positionRow, positionColumn);
-        if (direction === 'left') {
-            for (let i = 0; i < 2; i++) {
-                const newCoordinates = [position[0][0], (position[0][1] - i)]
-                playerBoard[position[0][0]][position[0][1] - i] = newCoordinates;
+        shipStatus = BattleShip.shipValidity(positionRow, positionColumn, 2, direction, shipStatus)
+        if (!shipStatus) {
+            return 'Battleship is outside of bounds';
+        } else {
+            if (direction === 'left') {
+                for (let i = 0; i < 2; i++) {
+                    const position = BattleShip.positionValidation(positionRow, positionColumn);
+                    const newCoordinates = [position[0][0], (position[0][1] - i)]
+                    playerBoard[position[0][0]][position[0][1] - i] = newCoordinates;
+                }
+            } else if (direction === 'right') {
+                for (let i = 0; i < 2; i++) {
+                    const position = BattleShip.positionValidation(positionRow, positionColumn);
+                    const newCoordinates = [position[0][0], (position[0][1] + i)]
+                    playerBoard[position[0][0]][position[0][1] + i] = newCoordinates;
+                }
+            } else if (direction === 'up') {
+                for (let i = 0; i < 2; i++) {
+                    const position = BattleShip.positionValidation(positionRow, positionColumn);
+                    const newCoordinates = [position[0][0] - i, (position[0][1])]
+                    playerBoard[position[0][0] - i][position[0][1]] = newCoordinates;
+                }
+            } else if (direction === 'down') {
+                for (let i = 0; i < 2; i++) {
+                    const position = BattleShip.positionValidation(positionRow, positionColumn);
+                    const newCoordinates = [position[0][0] + i, (position[0][1])]
+                    playerBoard[position[0][0] + i][position[0][1]] = newCoordinates;
+                }
             }
         }
-        // TODO: Write the code that pushes positions into gameboard array, also needs to validate if the position has been taken already. Resuse board location code.
-        return playerBoard;
+        return shipStatus;
     }
 
     return { generateGameboard, playerBoard, opponentBoard, generateCarrier, generateDestroyer }

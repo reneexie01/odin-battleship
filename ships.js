@@ -16,7 +16,7 @@ const BattleShip = (function() {
             },
             position: positionValidation(positionRow, positionColumn),
             direction: directionValidation(direction),
-            boardLocation: boardLocation(positionRow, positionColumn, length, direction), // TODO: Do we need an array for all coordinates like boardLocation?
+            shipValidity: shipValidity(positionRow, positionColumn, length, direction), // TODO: Do we need an array for all coordinates like boardLocation?
             hitCount: hitCount,
             sunk: sunk,
         }
@@ -46,15 +46,14 @@ const BattleShip = (function() {
     const coordinatesValidation = (coordinates, shipStatus) => {
         coordinates.forEach((coordinate) => {
             const validatedCoordinates = positionValidation(coordinate[0], coordinate[1])
-            if (!validatedCoordinates[2][0]) {
+            if (!validatedCoordinates[1][0] || !validatedCoordinates[2][0]) { // TODO: Need to check both coordinates
                 shipStatus = false;
             }
         })
         return shipStatus
     }
 
-    const boardLocation = (positionRow, positionColumn, length, direction) => { // TODO: How to handle validation of new coordinates
-        let shipStatus = true;
+    const shipValidity = (positionRow, positionColumn, length, direction, shipStatus) => { // TODO: Consider removing this - redundant code
         let boardCoordinates = [];
         const position = positionValidation(positionRow, positionColumn)
         if (direction === 'left') {
@@ -79,14 +78,17 @@ const BattleShip = (function() {
             }
         }
         shipStatus = coordinatesValidation(boardCoordinates, shipStatus);
+        return shipStatus
+        /*
         if (!shipStatus) {
             return 'Battleship is outside of bounds';
         } else {
             return boardCoordinates;
         }
+        */
     }
 
-    return { ship, positionValidation }
+    return { ship, positionValidation, shipValidity }
 
 })()
 

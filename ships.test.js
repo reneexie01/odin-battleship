@@ -24,22 +24,6 @@ test('Battleship Factory accepts a position', () => {
     expect(BattleShip.ship(2, 2, 2, 'left').direction).toBe('left');
 })
 
-test('Battleship Factory generates coordinates from position and left direction', () => {
-    expect(BattleShip.ship(2, 2, 4, 'left').boardLocation).toEqual([[2,4],[2,3]]);
-})
-
-test('Battleship Factory generates coordinates from position and right direction', () => {
-    expect(BattleShip.ship(3, 2, 4, 'right').boardLocation).toEqual([[2,4],[2,5],[2,6]]);
-})
-
-test('Battleship Factory generates coordinates from position and up direction', () => {
-    expect(BattleShip.ship(2, 3, 4, 'up').boardLocation).toEqual([[3,4],[2,4]]);
-})
-
-test('Battleship Factory generates coordinates from position and down direction', () => {
-    expect(BattleShip.ship(3, 3, 4, 'down').boardLocation).toEqual([[3,4],[4,4],[5,4]]);
-})
-
 test('Battleship Factory rejects generated coordinates that are out of bounds', () => {
-    expect(BattleShip.ship(6, 3, 3, 'left').boardLocation).toEqual('Battleship is outside of bounds');
+    expect(BattleShip.ship(6, 3, 3, 'left').shipValidity).toEqual(false);
 })
