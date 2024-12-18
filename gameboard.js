@@ -33,6 +33,7 @@ const Gameboard = (function() {
 
     const generateDestroyer = (positionRow, positionColumn, direction) => { // TODO: Validate if the position has been taken already. Also reduce the double up of code here.
         let shipStatus = true;
+        let isOccupied = false;
         shipStatus = BattleShip.shipValidity(positionRow, positionColumn, 2, direction, shipStatus).shipStatus;
         const coordinates = BattleShip.shipValidity(positionRow, positionColumn, 2, direction, shipStatus).coordinates;
         console.log(coordinates)
@@ -42,34 +43,33 @@ const Gameboard = (function() {
             if (direction === 'left') {
                 for (let i = 0; i < 2; i++) {
                     const position = BattleShip.positionValidation(positionRow, positionColumn);
-                    const newCoordinates = [position[0][0], (position[0][1] - i)]
-                    playerBoard[position[0][0]][position[0][1] - i] = newCoordinates;
+                    const newCoordinates = [position.coordinates[0], (position.coordinates[1] - i)]
+                    playerBoard[position.coordinates[0]][position.coordinates[1] - i] = newCoordinates;
                 }
             } else if (direction === 'right') {
                 for (let i = 0; i < 2; i++) {
                     const position = BattleShip.positionValidation(positionRow, positionColumn);
-                    const newCoordinates = [position[0][0], (position[0][1] + i)]
-                    playerBoard[position[0][0]][position[0][1] + i] = newCoordinates;
+                    const newCoordinates = [position.coordinates[0], (position.coordinates[1] + i)]
+                    playerBoard[position.coordinates[0]][position.coordinates[1] + i] = newCoordinates;
                 }
             } else if (direction === 'up') {
                 for (let i = 0; i < 2; i++) {
                     const position = BattleShip.positionValidation(positionRow, positionColumn);
-                    const newCoordinates = [position[0][0] - i, (position[0][1])]
-                    playerBoard[position[0][0] - i][position[0][1]] = newCoordinates;
+                    const newCoordinates = [position.coordinates[0] - i, (position.coordinates[1])]
+                    playerBoard[position.coordinates[0] - i][position.coordinates[1]] = newCoordinates;
                 }
             } else if (direction === 'down') {
                 for (let i = 0; i < 2; i++) {
                     const position = BattleShip.positionValidation(positionRow, positionColumn);
-                    const newCoordinates = [position[0][0] + i, (position[0][1])]
-                    playerBoard[position[0][0] + i][position[0][1]] = newCoordinates;
+                    const newCoordinates = [position.coordinates[0] + i, (position.coordinates[1])]
+                    playerBoard[position.coordinates[0] + i][position.coordinates[1]] = newCoordinates;
                 }
             }
         }
         return shipStatus;
     }
 
-    const isOccupied = (playerBoard, coordinates) => {
-        let isOccupied = false;
+    const isOccupied = (playerBoard, coordinates, isOccupied) => {
         let gameboardCoordinates = [];
         coordinates.forEach((coordinate) => {
             gameboardCoordinates.push(playerBoard[coordinate[0]][coordinate[1]]);

@@ -33,7 +33,7 @@ const BattleShip = (function() {
             columnStatus = false;
             return [['Column coordinate is outside of bounds'], [rowStatus], [columnStatus]]
         }
-        return [[positionRow, positionColumn], [rowStatus], [columnStatus]]
+        return { coordinates: [positionRow, positionColumn], rowStatus: rowStatus, columnStatus: columnStatus }
     }
 
     const directionValidation = (direction) => {
@@ -46,7 +46,7 @@ const BattleShip = (function() {
     const coordinatesValidation = (coordinates, shipStatus) => {
         coordinates.forEach((coordinate) => {
             const validatedCoordinates = positionValidation(coordinate[0], coordinate[1])
-            if (!validatedCoordinates[1][0] || !validatedCoordinates[2][0]) { // TODO: Need to check both coordinates
+            if (!validatedCoordinates.rowStatus || !validatedCoordinates.columnStatus) {
                 shipStatus = false;
             }
         })
@@ -58,22 +58,22 @@ const BattleShip = (function() {
         const position = positionValidation(positionRow, positionColumn)
         if (direction === 'left') {
             for (let i = 0; i < length; i++) {
-                const newCoordinates = [position[0][0], (position[0][1] - i)]
+                const newCoordinates = [position.coordinates[0], (position.coordinates[1] - i)]
                 boardCoordinates.push(newCoordinates);
             }
         } else if (direction === 'right') {
             for (let i = 0; i < length; i++) {
-                const newCoordinates = [position[0][0], (position[0][1] + i)]
+                const newCoordinates = [position.coordinates[0], (position.coordinates[1] + i)]
                 boardCoordinates.push(newCoordinates);
             }
         } else if (direction === 'up') {
             for (let i = 0; i < length; i++) {
-                const newCoordinates = [(position[0][0] - i), position[0][1]]
+                const newCoordinates = [(position.coordinates[0] - i), position.coordinates[1]]
                 boardCoordinates.push(newCoordinates);
             }
         } else if (direction === 'down') {
             for (let i = 0; i < length; i++) {
-                const newCoordinates = [(position[0][0] + i), position[0][1]]
+                const newCoordinates = [(position.coordinates[0] + i), position.coordinates[1]]
                 boardCoordinates.push(newCoordinates);
             }
         }

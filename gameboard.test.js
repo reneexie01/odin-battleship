@@ -15,13 +15,13 @@ test('Adds Carrier ship on the relevant section of the gameboard with direction 
     expect(player[2]).toEqual([null, null, null, [2,3], [2,4], [2,5], [2,6], [2,7], null, null]);
 })
 */
-/*
+
 test('Adds Destroyer ship on the relevant section of the gameboard with direction right', () => {
     const player = Gameboard.playerBoard;
     const destroyer = Gameboard.generateDestroyer(2, 4, 'right');
     expect(player[2]).toEqual([null, null, null, null, [2,4], [2,5], null, null, null, null]);
 })
-*/
+
 /*
 test('Adds Destroyer ship on the relevant section of the gameboard with direction up', () => {
     const player = Gameboard.playerBoard;
