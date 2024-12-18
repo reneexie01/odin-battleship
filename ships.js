@@ -27,20 +27,20 @@ const BattleShip = (function() {
         let columnStatus = true;
         if (positionRow < 0 || positionRow > 9) {
             rowStatus = false;
-            return [['Row coordinate is outside of bounds'], [rowStatus], [columnStatus]]
+            return { coordinates: ['Row coordinate is outside of bounds'], rowStatus: rowStatus, columnStatus: columnStatus }
         }
         if (positionColumn < 0 || positionColumn > 9) {
             columnStatus = false;
-            return [['Column coordinate is outside of bounds'], [rowStatus], [columnStatus]]
+            return { coordinates: ['Column coordinate is outside of bounds'], rowStatus: rowStatus, columnStatus: columnStatus }
         }
         return { coordinates: [positionRow, positionColumn], rowStatus: rowStatus, columnStatus: columnStatus }
     }
 
     const directionValidation = (direction) => {
         if (direction === 'left' || direction === 'right' || direction === 'up' || direction === 'down') {
-            return direction
+            return true;
         }
-        return 'Invalid direction received';
+        return false;
     }
 
     const coordinatesValidation = (coordinates, shipStatus) => {
@@ -88,7 +88,7 @@ const BattleShip = (function() {
         */
     }
 
-    return { ship, positionValidation, shipValidity }
+    return { ship, positionValidation, directionValidation, shipValidity }
 
 })()
 

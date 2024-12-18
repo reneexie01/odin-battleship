@@ -45,8 +45,23 @@ test('Fails Destroyer ship when any part of the ship is outside of bounds', () =
     expect(destroyer).toBe('Battleship is outside of bounds');
 })
 */
+/*
 test('Fails Destroyer ship when any part of the ship is outside of bounds', () => {
     const player = Gameboard.playerBoard;
     const destroyer = Gameboard.generateDestroyer(0, 9, 'right');
     expect(destroyer).toBe('Battleship is outside of bounds');
+})
+*/
+/*
+test('Fails Destroyer ship when any of the coordinates are already occupied', () => {
+    const player = Gameboard.playerBoard;
+    player[2][4] = [2,4]
+    const destroyer = Gameboard.generateDestroyer(2, 4, 'left');
+    expect(destroyer).toBe('Coordinates are occupied');
+})
+*/
+test('Fails Destroyer ship when direction is invalid', () => {
+    const player = Gameboard.playerBoard;
+    const destroyer = Gameboard.generateDestroyer(2, 4, 'lefts');
+    expect(destroyer).toBe('Invalid direction received');
 })

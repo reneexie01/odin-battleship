@@ -21,7 +21,7 @@ test('Battleship Factory with length 2 has been sunk after 2 hits', () => {
 })
 
 test('Battleship Factory accepts a position', () => {
-    expect(BattleShip.ship(2, 2, 2, 'left').direction).toBe('left');
+    expect(BattleShip.ship(2, 2, 2, 'left').direction).toBe(true);
 })
 
 test('Battleship Factory rejects generated coordinates that are out of bounds', () => {

@@ -31,14 +31,22 @@ const Gameboard = (function() {
         return BattleShip.ship(3, positionRow, positionColumn, direction);
     }
 
-    const generateDestroyer = (positionRow, positionColumn, direction) => { // TODO: Validate if the position has been taken already. Also reduce the double up of code here.
+    const generateDestroyer = (positionRow, positionColumn, direction) => { // TODO: Also reduce the double up of code here. Also check direction validation.
         let shipStatus = true;
-        let isOccupied = false;
+        let occupied = false;
+        let directionStatus = true;
+
         shipStatus = BattleShip.shipValidity(positionRow, positionColumn, 2, direction, shipStatus).shipStatus;
         const coordinates = BattleShip.shipValidity(positionRow, positionColumn, 2, direction, shipStatus).coordinates;
-        console.log(coordinates)
-        if (!shipStatus) {
+        occupied = isOccupied(coordinates, occupied)
+        directionStatus = BattleShip.directionValidation(direction);
+        
+        if (!shipStatus ) {
             return 'Battleship is outside of bounds';
+        } else if (occupied) {
+            return 'Coordinates are occupied';
+        } else if (!directionStatus) {
+            return 'Invalid direction received'
         } else {
             if (direction === 'left') {
                 for (let i = 0; i < 2; i++) {
@@ -69,7 +77,7 @@ const Gameboard = (function() {
         return shipStatus;
     }
 
-    const isOccupied = (playerBoard, coordinates, isOccupied) => {
+    const isOccupied = (coordinates, occupied) => {
         let gameboardCoordinates = [];
         coordinates.forEach((coordinate) => {
             gameboardCoordinates.push(playerBoard[coordinate[0]][coordinate[1]]);
@@ -79,9 +87,9 @@ const Gameboard = (function() {
             blankCoodinates.push(null);
         }
         if (JSON.stringify(gameboardCoordinates) !== JSON.stringify(blankCoodinates)) {
-            isOccupied = true;
+            occupied = true;
         }
-        return isOccupied;
+        return occupied;
     } // TODO: Need to add this into the generate function
 
     return { generateGameboard, playerBoard, opponentBoard, generateCarrier, generateDestroyer }
