@@ -1,5 +1,5 @@
 const BattleShip = (function() {
-    const ship = (length, positionRow, positionColumn, direction, hitCount = 0, sunk = false) => {
+    const ship = (length, positionRow, positionColumn, direction, hitCount = 0, sunk = false, shipStatus = true) => {
         return {
             length: length,
             hit() {
@@ -16,7 +16,7 @@ const BattleShip = (function() {
             },
             position: positionValidation(positionRow, positionColumn),
             direction: directionValidation(direction),
-            shipValidity: shipValidity(positionRow, positionColumn, length, direction), // TODO: Do we need an array for all coordinates like boardLocation?
+            shipValidity: shipValidity(positionRow, positionColumn, length, direction, shipStatus), // TODO: Do we need an array for all coordinates like boardLocation?
             hitCount: hitCount,
             sunk: sunk,
         }
@@ -53,7 +53,7 @@ const BattleShip = (function() {
         return shipStatus;
     }
 
-    const shipValidity = (positionRow, positionColumn, length, direction, shipStatus) => { // TODO: Consider removing this - redundant code
+    const shipValidity = (positionRow, positionColumn, length, direction, shipStatus) => {
         let boardCoordinates = [];
         const position = positionValidation(positionRow, positionColumn)
         if (direction === 'left') {
