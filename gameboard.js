@@ -16,20 +16,24 @@ const Gameboard = (function() {
     const opponentBoard = generateGameboard();
 
     const generateCarrier = (positionRow, positionColumn, direction) => { 
-        let occupied = false;
+        const directionStatus = BattleShip.directionValidation(direction)
+        if (!directionStatus) {
+            return 'Invalid direction received' 
+        }
+    
         const carrier = BattleShip.ship(5, positionRow, positionColumn, direction)
 
-        let shipStatus = carrier.shipValidity.shipStatus;
-        const carrierCoordinates = carrier.shipValidity.coordinates;
-        occupied = isOccupied(carrierCoordinates, occupied)
-        const directionStatus = carrier.direction;
-        
+        const shipStatus = carrier.shipValidity.shipStatus;
         if (!shipStatus ) {
             return 'Battleship is outside of bounds';
-        } else if (occupied) {
+        }
+        
+        const carrierCoordinates = carrier.shipValidity.coordinates;
+        let occupied = false;    
+        occupied = isOccupied(carrierCoordinates, occupied)
+        
+        if (occupied) {
             return 'Coordinates are occupied';
-        } else if (!directionStatus) {
-            return 'Invalid direction received'
         } else {
             const startingPosition = carrier.position.coordinates;
             if (direction === 'left') {
@@ -58,20 +62,24 @@ const Gameboard = (function() {
     }
 
     const generateBattleship = (positionRow, positionColumn, direction) => {
-        let occupied = false;
+        const directionStatus = BattleShip.directionValidation(direction)
+        if (!directionStatus) {
+            return 'Invalid direction received' 
+        }
+    
         const battleship = BattleShip.ship(4, positionRow, positionColumn, direction)
 
-        let shipStatus = battleship.shipValidity.shipStatus;
-        const battleshipCoordinates = battleship.shipValidity.coordinates;
-        occupied = isOccupied(battleshipCoordinates, occupied)
-        const directionStatus = battleship.direction;
-        
+        const shipStatus = battleship.shipValidity.shipStatus;
         if (!shipStatus ) {
             return 'Battleship is outside of bounds';
-        } else if (occupied) {
+        }
+        
+        const battleshipCoordinates = battleship.shipValidity.coordinates;
+        let occupied = false;    
+        occupied = isOccupied(battleshipCoordinates, occupied)
+        
+        if (occupied) {
             return 'Coordinates are occupied';
-        } else if (!directionStatus) {
-            return 'Invalid direction received'
         } else {
             const startingPosition = battleship.position.coordinates;
             if (direction === 'left') {
@@ -100,20 +108,24 @@ const Gameboard = (function() {
     }
 
     const generateCruiser = (positionRow, positionColumn, direction) => {
-        let occupied = false;
+        const directionStatus = BattleShip.directionValidation(direction)
+        if (!directionStatus) {
+            return 'Invalid direction received' 
+        }
+    
         const cruiser = BattleShip.ship(3, positionRow, positionColumn, direction)
 
-        let shipStatus = cruiser.shipValidity.shipStatus;
-        const cruiserCoordinates = cruiser.shipValidity.coordinates;
-        occupied = isOccupied(cruiserCoordinates, occupied)
-        const directionStatus = cruiser.direction;
-        
+        const shipStatus = cruiser.shipValidity.shipStatus;
         if (!shipStatus ) {
             return 'Battleship is outside of bounds';
-        } else if (occupied) {
+        }
+        
+        const cruiserCoordinates = cruiser.shipValidity.coordinates;
+        let occupied = false;    
+        occupied = isOccupied(cruiserCoordinates, occupied)
+        
+        if (occupied) {
             return 'Coordinates are occupied';
-        } else if (!directionStatus) {
-            return 'Invalid direction received'
         } else {
             const startingPosition = cruiser.position.coordinates;
             if (direction === 'left') {
@@ -142,20 +154,24 @@ const Gameboard = (function() {
     }
 
     const generateSubmarine = (positionRow, positionColumn, direction) => {
-        let occupied = false;
+        const directionStatus = BattleShip.directionValidation(direction)
+        if (!directionStatus) {
+            return 'Invalid direction received' 
+        }
+    
         const submarine = BattleShip.ship(3, positionRow, positionColumn, direction)
 
-        let shipStatus = submarine.shipValidity.shipStatus;
-        const submarineCoordinates = submarine.shipValidity.coordinates;
-        occupied = isOccupied(submarineCoordinates, occupied)
-        const directionStatus = submarine.direction;
-        
+        const shipStatus = submarine.shipValidity.shipStatus;
         if (!shipStatus ) {
             return 'Battleship is outside of bounds';
-        } else if (occupied) {
+        }
+        
+        const submarineCoordinates = submarine.shipValidity.coordinates;
+        let occupied = false;    
+        occupied = isOccupied(submarineCoordinates, occupied)
+        
+        if (occupied) {
             return 'Coordinates are occupied';
-        } else if (!directionStatus) {
-            return 'Invalid direction received'
         } else {
             const startingPosition = submarine.position.coordinates;
             if (direction === 'left') {
@@ -183,21 +199,25 @@ const Gameboard = (function() {
         return submarine;
     }
 
-    const generateDestroyer = (positionRow, positionColumn, direction) => { // TODO: Reduce the double up of code here.
-        let occupied = false;
+    const generateDestroyer = (positionRow, positionColumn, direction) => { 
+        const directionStatus = BattleShip.directionValidation(direction)
+        if (!directionStatus) {
+            return 'Invalid direction received' 
+        }
+    
         const destroyer = BattleShip.ship(2, positionRow, positionColumn, direction)
 
-        let shipStatus = destroyer.shipValidity.shipStatus;
-        const destroyerCoordinates = destroyer.shipValidity.coordinates;
-        occupied = isOccupied(destroyerCoordinates, occupied)
-        const directionStatus = destroyer.direction;
-        
+        const shipStatus = destroyer.shipValidity.shipStatus;
         if (!shipStatus ) {
             return 'Battleship is outside of bounds';
-        } else if (occupied) {
+        }
+        
+        const destroyerCoordinates = destroyer.shipValidity.coordinates;
+        let occupied = false;    
+        occupied = isOccupied(destroyerCoordinates, occupied)
+        
+        if (occupied) {
             return 'Coordinates are occupied';
-        } else if (!directionStatus) {
-            return 'Invalid direction received'
         } else {
             const startingPosition = destroyer.position.coordinates;
             if (direction === 'left') {
@@ -222,14 +242,13 @@ const Gameboard = (function() {
                 }
             }
         }
-        console.log(destroyer)
         return destroyer;
     }
 
     const isOccupied = (coordinates, occupied) => {
         let gameboardCoordinates = [];
         coordinates.forEach((coordinate) => {
-            gameboardCoordinates.push(playerBoard[coordinate[0]][coordinate[1]]);
+            gameboardCoordinates.push(playerBoard[coordinate[0]][coordinate[1]])
         })
         let blankCoodinates = [];
         for (let i = 0; i < gameboardCoordinates.length; i++) {

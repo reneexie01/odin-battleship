@@ -43,50 +43,30 @@ const BattleShip = (function() {
         return false;
     }
 
-    const coordinatesValidation = (coordinates, shipStatus) => {
-        coordinates.forEach((coordinate) => {
-            const validatedCoordinates = positionValidation(coordinate[0], coordinate[1])
+    const shipValidity = (positionRow, positionColumn, length, direction, shipStatus) => {
+        let boardCoordinates = [];
+        const startPosition = [positionRow, positionColumn];
+        for (let i = 0; i < length; i++) {
+            let newCoordinates;
+            if (direction === 'left') {
+                newCoordinates = [startPosition[0], startPosition[1] - i];
+            } else if (direction === 'right') {
+                newCoordinates = [startPosition[0], startPosition[1] + i];
+            } else if (direction === 'up') {
+                newCoordinates = [startPosition[0] - i, startPosition[1]];
+            } else if (direction === 'down') {
+                newCoordinates = [startPosition[0] + i, startPosition[1]];
+            }
+            boardCoordinates.push(newCoordinates);
+    
+            const validatedCoordinates = positionValidation(newCoordinates[0], newCoordinates[1]);
             if (!validatedCoordinates.rowStatus || !validatedCoordinates.columnStatus) {
                 shipStatus = false;
             }
-        })
-        return shipStatus;
-    }
-
-    const shipValidity = (positionRow, positionColumn, length, direction, shipStatus) => {
-        let boardCoordinates = [];
-        const position = positionValidation(positionRow, positionColumn)
-        if (direction === 'left') {
-            for (let i = 0; i < length; i++) {
-                const newCoordinates = [position.coordinates[0], (position.coordinates[1] - i)]
-                boardCoordinates.push(newCoordinates);
-            }
-        } else if (direction === 'right') {
-            for (let i = 0; i < length; i++) {
-                const newCoordinates = [position.coordinates[0], (position.coordinates[1] + i)]
-                boardCoordinates.push(newCoordinates);
-            }
-        } else if (direction === 'up') {
-            for (let i = 0; i < length; i++) {
-                const newCoordinates = [(position.coordinates[0] - i), position.coordinates[1]]
-                boardCoordinates.push(newCoordinates);
-            }
-        } else if (direction === 'down') {
-            for (let i = 0; i < length; i++) {
-                const newCoordinates = [(position.coordinates[0] + i), position.coordinates[1]]
-                boardCoordinates.push(newCoordinates);
-            }
         }
-        shipStatus = coordinatesValidation(boardCoordinates, shipStatus)
-        return { shipStatus: shipStatus, coordinates: boardCoordinates }
-        /*
-        if (!shipStatus) {
-            return 'Battleship is outside of bounds';
-        } else {
-            return boardCoordinates;
-        }
-        */
-    }
+        return { shipStatus: shipStatus, coordinates: boardCoordinates };
+    };
+    
 
     return { ship, positionValidation, directionValidation, shipValidity }
 
