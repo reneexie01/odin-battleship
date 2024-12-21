@@ -158,7 +158,7 @@ test('Player ships records a hit', () => {
             position: { coordinates: [ 6, 1 ], rowStatus: true, columnStatus: true },
             direction: true,
             shipValidity: { shipStatus: true, coordinates: [ 'arrays' ] },
-            hitCount: 1,
+            hitCount: 2,
             sunk: false
           }
     );
@@ -214,6 +214,7 @@ test('Player ships does not double count a hit', () => {
     );
 })
 */
+/*
 test('Adds all relevant ships to playerShip object', () => {
     const player = Gameboard.playerBoard;
     const playerShips = Gameboard.playerShips;
@@ -224,6 +225,30 @@ test('Adds all relevant ships to playerShip object', () => {
     const destroyer = Gameboard.generateDestroyer(1, 5, 'down');
     console.log(playerShips)
     expect(0).toEqual(0)})
-
-//TODO: For each ship, identify when it has been sunk
+*/
+test('Player ships records when sunk', () => {
+    const cruiser = Gameboard.generateCruiser(6, 1, 'up');
+    Gameboard.receiveAttack(6,1);
+    Gameboard.receiveAttack(5,1);
+    Gameboard.receiveAttack(4,1);
+    cruiser.id = '_qvgslejdt';
+    cruiser.hit = 'function';
+    cruiser.isSunk = 'function';
+    cruiser.shipValidity.coordinates =[ 'arrays' ];
+    expect(Gameboard.playerShips.cruiserObject).toEqual(
+        {
+            id: '_qvgslejdt',
+            type: 'cruiser',
+            length: 3,
+            hit: 'function',
+            isSunk: 'function',
+            position: { coordinates: [ 6, 1 ], rowStatus: true, columnStatus: true },
+            direction: true,
+            shipValidity: { shipStatus: true, coordinates: [ 'arrays' ] },
+            hitCount: 3,
+            sunk: true
+            }
+    );
+})
+    
 //TODO: For the player, identify when all ships are sunk

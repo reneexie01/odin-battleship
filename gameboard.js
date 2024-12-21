@@ -13,7 +13,6 @@ const Gameboard = (function() {
     }
 
     const playerBoard = generateGameboard();
-    const opponentBoard = generateGameboard();
 
     const playerShips = {}
 
@@ -252,6 +251,7 @@ const Gameboard = (function() {
         if (boardLocation.type !== null && boardLocation.shot !== 'hit') {
             boardLocation.shot = 'hit';
             playerShips[`${boardLocation.type}Object`].hitCount++;
+            playerShips[`${boardLocation.type}Object`].isSunk();
         } else if (boardLocation.type === null) {
             boardLocation.shot = 'miss';
         } else {
@@ -259,7 +259,7 @@ const Gameboard = (function() {
         }
     }
 
-    return { playerBoard, opponentBoard, playerShips, generateCarrier, generateBattleship, generateCruiser, generateSubmarine, generateDestroyer, receiveAttack }
+    return { playerBoard, playerShips, generateCarrier, generateBattleship, generateCruiser, generateSubmarine, generateDestroyer, receiveAttack }
 
 })()
 
