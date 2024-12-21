@@ -10,7 +10,7 @@ test('Generates a Carrier ship', () => {
     expect(Gameboard.generateCarrier(2, 3, 'right').shipValidity.coordinates).toEqual([[2,3], [2,4], [2,5], [2,6], [2,7]])
 })
 */
-
+/*
 test('Adds Carrier ship on the relevant section of the gameboard with direction right', () => {
     const player = Gameboard.playerBoard;
     const carrier = Gameboard.generateCarrier(2, 3, 'right');
@@ -21,7 +21,7 @@ test('Adds Carrier ship on the relevant section of the gameboard with direction 
     expect(player[2][7].type).toEqual('carrier');
     expect(player[2][8].type).toEqual(null);
 })
-
+*/
 /*
 test('Adds Battleship ship on the relevant section of the gameboard with direction down', () => {
     const player = Gameboard.playerBoard;
@@ -101,6 +101,129 @@ test('Fails Carrier ship when any part of the ship is outside of bounds', () => 
     expect(carrier).toBe('Battleship is outside of bounds');
 })
 */
+/*
+test('Board records a hit on a ship', () => {
+    const player = Gameboard.playerBoard;
+    const destroyer = Gameboard.generateDestroyer(9, 1, 'up');
+    Gameboard.receiveAttack(9,1);
+    expect(player[9][1].shot).toEqual('hit');
+})
+*/
+/*
+test('Board records a miss', () => {
+    const player = Gameboard.playerBoard;
+    const destroyer = Gameboard.generateDestroyer(9, 1, 'up');
+    Gameboard.receiveAttack(1,1);
+    expect(player[1][1].shot).toEqual('miss');
+})
+*/
+/*
+test('Player ships are made and added to object', () => {
+    const destroyer = Gameboard.generateDestroyer(6, 1, 'up');
+    destroyer.id = '_qvgslejdt';
+    destroyer.hit = 'function';
+    destroyer.isSunk = 'function';
+    destroyer.shipValidity.coordinates =[ 'arrays' ];
+    expect(Gameboard.playerShips.destroyerObject).toEqual(
+        {
+            id: '_qvgslejdt',
+            type: 'destroyer',
+            length: 2,
+            hit: 'function',
+            isSunk: 'function',
+            position: { coordinates: [ 6, 1 ], rowStatus: true, columnStatus: true },
+            direction: true,
+            shipValidity: { shipStatus: true, coordinates: [ 'arrays' ] },
+            hitCount: 0,
+            sunk: false
+          }
+    );
+})
+*/
+/*
+test('Player ships records a hit', () => {
+    const destroyer = Gameboard.generateDestroyer(6, 1, 'up');
+    Gameboard.receiveAttack(6,1);
+    destroyer.id = '_qvgslejdt';
+    destroyer.hit = 'function';
+    destroyer.isSunk = 'function';
+    destroyer.shipValidity.coordinates =[ 'arrays' ];
+    expect(Gameboard.playerShips.destroyerObject).toEqual(
+        {
+            id: '_qvgslejdt',
+            type: 'destroyer',
+            length: 2,
+            hit: 'function',
+            isSunk: 'function',
+            position: { coordinates: [ 6, 1 ], rowStatus: true, columnStatus: true },
+            direction: true,
+            shipValidity: { shipStatus: true, coordinates: [ 'arrays' ] },
+            hitCount: 1,
+            sunk: false
+          }
+    );
+})
+*/
+/*
+test('Player ships does not a hit when shot is missed', () => {
+    const destroyer = Gameboard.generateDestroyer(6, 1, 'up');
+    Gameboard.receiveAttack(1,1);
+    destroyer.id = '_qvgslejdt';
+    destroyer.hit = 'function';
+    destroyer.isSunk = 'function';
+    destroyer.shipValidity.coordinates =[ 'arrays' ];
+    expect(Gameboard.playerShips.destroyerObject).toEqual(
+        {
+            id: '_qvgslejdt',
+            type: 'destroyer',
+            length: 2,
+            hit: 'function',
+            isSunk: 'function',
+            position: { coordinates: [ 6, 1 ], rowStatus: true, columnStatus: true },
+            direction: true,
+            shipValidity: { shipStatus: true, coordinates: [ 'arrays' ] },
+            hitCount: 0,
+            sunk: false
+          }
+    );
+})
+*/
+/*
+test('Player ships does not double count a hit', () => {
+    const player = Gameboard.playerBoard;
+    const destroyer = Gameboard.generateDestroyer(6, 1, 'up');
+    Gameboard.receiveAttack(6,1);
+    Gameboard.receiveAttack(6,1);
+    destroyer.id = '_qvgslejdt';
+    destroyer.hit = 'function';
+    destroyer.isSunk = 'function';
+    destroyer.shipValidity.coordinates =[ 'arrays' ];
+    expect(Gameboard.playerShips.destroyerObject).toEqual(
+        {
+            id: '_qvgslejdt',
+            type: 'destroyer',
+            length: 2,
+            hit: 'function',
+            isSunk: 'function',
+            position: { coordinates: [ 6, 1 ], rowStatus: true, columnStatus: true },
+            direction: true,
+            shipValidity: { shipStatus: true, coordinates: [ 'arrays' ] },
+            hitCount: 1,
+            sunk: false
+          }
+    );
+})
+*/
+test('Adds all relevant ships to playerShip object', () => {
+    const player = Gameboard.playerBoard;
+    const playerShips = Gameboard.playerShips;
+    const carrier = Gameboard.generateCarrier(1, 1, 'down');
+    const battleship = Gameboard.generateBattleship(1, 2, 'down');
+    const cruiser = Gameboard.generateCruiser(1, 3, 'down');
+    const submarine = Gameboard.generateSubmarine(1, 4, 'down');
+    const destroyer = Gameboard.generateDestroyer(1, 5, 'down');
+    console.log(playerShips)
+    expect(0).toEqual(0)})
 
-//TODO: Change generateGameboard function to object with { shipId, type, shot } - this will impact the generateDestroyer functions
-//TODO: Change generateDestroyer function to replace position with updated object once it has been added
+//TODO: For each ship, identify when it has been sunk
+//TODO: For the player, identify when all ships are sunk

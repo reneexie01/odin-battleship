@@ -1,8 +1,8 @@
 const BattleShip = (function() {
-    const ship = (length, positionRow, positionColumn, direction, hitCount = 0, sunk = false, shipStatus = true) => {
+    const ship = (length, type, positionRow, positionColumn, direction, hitCount = 0, sunk = false, shipStatus = true) => {
         return {
             id: toolsManager.generateUniqueId(),
-            type: '',
+            type: type,
             length: length,
             hit() {
                 if(!this.sunk) {
