@@ -1,6 +1,8 @@
 const BattleShip = (function() {
     const ship = (length, positionRow, positionColumn, direction, hitCount = 0, sunk = false, shipStatus = true) => {
         return {
+            id: toolsManager.generateUniqueId(),
+            type: '',
             length: length,
             hit() {
                 if(!this.sunk) {
@@ -73,3 +75,4 @@ const BattleShip = (function() {
 })()
 
 export { BattleShip };
+import { toolsManager } from "./tools";

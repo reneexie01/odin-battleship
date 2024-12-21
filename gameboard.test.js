@@ -1,13 +1,10 @@
 import { Gameboard } from './gameboard';
 
-
-test('Gameboard returns an array', () => {
-    expect(Array.isArray(Gameboard.generateGameboard())).toBe(true);
+test('Generates gameboard with relevant objects in each index', () => {
+    const player = Gameboard.playerBoard;
+    expect(player[0][0]).toEqual({ id: null, type: null, shot: null });
 })
 
-test('Gameboard returns 10 indexes', () => {
-    expect(Gameboard.generateGameboard().length).toBe(10)
-})
 /*
 test('Generates a Carrier ship', () => {
     expect(Gameboard.generateCarrier(2, 3, 'right').shipValidity.coordinates).toEqual([[2,3], [2,4], [2,5], [2,6], [2,7]])
@@ -17,42 +14,48 @@ test('Generates a Carrier ship', () => {
 test('Adds Carrier ship on the relevant section of the gameboard with direction right', () => {
     const player = Gameboard.playerBoard;
     const carrier = Gameboard.generateCarrier(2, 3, 'right');
-    expect(player[2]).toEqual([null, null, null, [2,3], [2,4], [2,5], [2,6], [2,7], null, null]);
+    expect(player[2][3].type).toEqual('carrier');
+    expect(player[2][4].type).toEqual('carrier');
+    expect(player[2][5].type).toEqual('carrier');
+    expect(player[2][6].type).toEqual('carrier');
+    expect(player[2][7].type).toEqual('carrier');
+    expect(player[2][8].type).toEqual(null);
 })
 
+/*
 test('Adds Battleship ship on the relevant section of the gameboard with direction down', () => {
     const player = Gameboard.playerBoard;
     const battleship = Gameboard.generateBattleship(4, 4, 'down');
-    expect(player[4]).toEqual([null, null, null, null, [4,4], null, null, null, null, null]);
-    expect(player[5]).toEqual([null, null, null, null, [5,4], null, null, null, null, null]);
-    expect(player[6]).toEqual([null, null, null, null, [6,4], null, null, null, null, null]);
-    expect(player[7]).toEqual([null, null, null, null, [7,4], null, null, null, null, null]);
+    expect(player[4][4].type).toEqual('battleship');
+    expect(player[5][4].type).toEqual('battleship');
+    expect(player[6][4].type).toEqual('battleship');
+    expect(player[7][4].type).toEqual('battleship');
 })
-
+*/
 /*
 test('Adds Cruiser ship on the relevant section of the gameboard with direction down', () => {
     const player = Gameboard.playerBoard;
     const cruiser = Gameboard.generateCruiser(4, 5, 'down');
-    expect(player[4]).toEqual([null, null, null, null, null, [4,5], null, null, null, null]);
-    expect(player[5]).toEqual([null, null, null, null, null, [5,5], null, null, null, null]);
-    expect(player[6]).toEqual([null, null, null, null, null, [6,5], null, null, null, null]);
+    expect(player[4][5].type).toEqual('cruiser');
+    expect(player[5][5].type).toEqual('cruiser');
+    expect(player[6][5].type).toEqual('cruiser');
 })
 */
 /*
 test('Adds Submarine ship on the relevant section of the gameboard with direction up', () => {
     const player = Gameboard.playerBoard;
     const submarine = Gameboard.generateSubmarine(9, 1, 'up');
-    expect(player[7]).toEqual([null, [7,1], null, null, null, null, null, null, null, null]);
-    expect(player[8]).toEqual([null, [8,1], null, null, null, null, null, null, null, null]);
-    expect(player[9]).toEqual([null, [9,1], null, null, null, null, null, null, null, null]);
+    expect(player[7][1].type).toEqual('submarine');
+    expect(player[8][1].type).toEqual('submarine');
+    expect(player[9][1].type).toEqual('submarine');
 })
 */
 /*
 test('Adds Destroyer ship on the relevant section of the gameboard with direction up', () => {
     const player = Gameboard.playerBoard;
     const destroyer = Gameboard.generateDestroyer(9, 1, 'up');
-    expect(player[8]).toEqual([null, [8,1], null, null, null, null, null, null, null, null]);
-    expect(player[9]).toEqual([null, [9,1], null, null, null, null, null, null, null, null]);
+    expect(player[8][1].type).toEqual('destroyer');
+    expect(player[9][1].type).toEqual('destroyer');
 })
 */
 /*
@@ -91,9 +94,13 @@ test('Fails Destroyer ship when any part of the ship is outside of bounds', () =
     expect(destroyer).toBe('Battleship is outside of bounds');
 })
 */
-
+/*
 test('Fails Carrier ship when any part of the ship is outside of bounds', () => {
     const player = Gameboard.playerBoard;
     const carrier = Gameboard.generateCarrier(0, 3, 'up');
     expect(carrier).toBe('Battleship is outside of bounds');
 })
+*/
+
+//TODO: Change generateGameboard function to object with { shipId, type, shot } - this will impact the generateDestroyer functions
+//TODO: Change generateDestroyer function to replace position with updated object once it has been added

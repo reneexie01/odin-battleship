@@ -6,7 +6,7 @@ const Gameboard = (function() {
         for (let i = 0; i < rows; i++) {
             array[i] = []
             for (let j = 0; j < columns; j++) {
-                array[i][j] = null;
+                array[i][j] = { id: null, type: null, shot: null };
             }
         }
         return array;
@@ -38,23 +38,19 @@ const Gameboard = (function() {
             const startingPosition = carrier.position.coordinates;
             if (direction === 'left') {
                 for (let i = 0; i < 5; i++) {
-                    const newCoordinates = [startingPosition[0], (startingPosition[1] - i)]
-                    playerBoard[startingPosition[0]][startingPosition[1] - i] = newCoordinates;
+                    playerBoard[startingPosition[0]][startingPosition[1] - i] = { id: carrier.id, type: 'carrier', shot: null };
                 }
             } else if (direction === 'right') {
                 for (let i = 0; i < 5; i++) {
-                    const newCoordinates = [startingPosition[0], (startingPosition[1] + i)]
-                    playerBoard[startingPosition[0]][startingPosition[1] + i] = newCoordinates;
+                    playerBoard[startingPosition[0]][startingPosition[1] + i] = { id: carrier.id, type: 'carrier', shot: null };
                 }
             } else if (direction === 'up') {
                 for (let i = 0; i < 5; i++) {
-                    const newCoordinates = [startingPosition[0] - i, (startingPosition[1])]
-                    playerBoard[startingPosition[0] - i][startingPosition[1]] = newCoordinates;
+                    playerBoard[startingPosition[0] - i][startingPosition[1]] = { id: carrier.id, type: 'carrier', shot: null };
                 }
             } else if (direction === 'down') {
                 for (let i = 0; i < 5; i++) {
-                    const newCoordinates = [startingPosition[0] + i, (startingPosition[1])]
-                    playerBoard[startingPosition[0] + i][startingPosition[1]] = newCoordinates;
+                    playerBoard[startingPosition[0] + i][startingPosition[1]] = { id: carrier.id, type: 'carrier', shot: null };
                 }
             }
         }
@@ -84,23 +80,19 @@ const Gameboard = (function() {
             const startingPosition = battleship.position.coordinates;
             if (direction === 'left') {
                 for (let i = 0; i < 4; i++) {
-                    const newCoordinates = [startingPosition[0], (startingPosition[1] - i)]
-                    playerBoard[startingPosition[0]][startingPosition[1] - i] = newCoordinates;
+                    playerBoard[startingPosition[0]][startingPosition[1] - i] = { id: battleship.id, type: 'battleship', shot: null };
                 }
             } else if (direction === 'right') {
                 for (let i = 0; i < 4; i++) {
-                    const newCoordinates = [startingPosition[0], (startingPosition[1] + i)]
-                    playerBoard[startingPosition[0]][startingPosition[1] + i] = newCoordinates;
+                    playerBoard[startingPosition[0]][startingPosition[1] + i] = { id: battleship.id, type: 'battleship', shot: null };
                 }
             } else if (direction === 'up') {
                 for (let i = 0; i < 4; i++) {
-                    const newCoordinates = [startingPosition[0] - i, (startingPosition[1])]
-                    playerBoard[startingPosition[0] - i][startingPosition[1]] = newCoordinates;
+                    playerBoard[startingPosition[0] - i][startingPosition[1]] = { id: battleship.id, type: 'battleship', shot: null };
                 }
             } else if (direction === 'down') {
                 for (let i = 0; i < 4; i++) {
-                    const newCoordinates = [startingPosition[0] + i, (startingPosition[1])]
-                    playerBoard[startingPosition[0] + i][startingPosition[1]] = newCoordinates;
+                    playerBoard[startingPosition[0] + i][startingPosition[1]] = { id: battleship.id, type: 'battleship', shot: null };
                 }
             }
         }
@@ -130,23 +122,19 @@ const Gameboard = (function() {
             const startingPosition = cruiser.position.coordinates;
             if (direction === 'left') {
                 for (let i = 0; i < 3; i++) {
-                    const newCoordinates = [startingPosition[0], (startingPosition[1] - i)]
-                    playerBoard[startingPosition[0]][startingPosition[1] - i] = newCoordinates;
+                    playerBoard[startingPosition[0]][startingPosition[1] - i] = { id: cruiser.id, type: 'cruiser', shot: null };
                 }
             } else if (direction === 'right') {
                 for (let i = 0; i < 3; i++) {
-                    const newCoordinates = [startingPosition[0], (startingPosition[1] + i)]
-                    playerBoard[startingPosition[0]][startingPosition[1] + i] = newCoordinates;
+                    playerBoard[startingPosition[0]][startingPosition[1] + i] = { id: cruiser.id, type: 'cruiser', shot: null };
                 }
             } else if (direction === 'up') {
                 for (let i = 0; i < 3; i++) {
-                    const newCoordinates = [startingPosition[0] - i, (startingPosition[1])]
-                    playerBoard[startingPosition[0] - i][startingPosition[1]] = newCoordinates;
+                    playerBoard[startingPosition[0] - i][startingPosition[1]] = { id: cruiser.id, type: 'cruiser', shot: null };;
                 }
             } else if (direction === 'down') {
                 for (let i = 0; i < 3; i++) {
-                    const newCoordinates = [startingPosition[0] + i, (startingPosition[1])]
-                    playerBoard[startingPosition[0] + i][startingPosition[1]] = newCoordinates;
+                    playerBoard[startingPosition[0] + i][startingPosition[1]] = { id: cruiser.id, type: 'cruiser', shot: null };;
                 }
             }
         }
@@ -176,23 +164,19 @@ const Gameboard = (function() {
             const startingPosition = submarine.position.coordinates;
             if (direction === 'left') {
                 for (let i = 0; i < 3; i++) {
-                    const newCoordinates = [startingPosition[0], (startingPosition[1] - i)]
-                    playerBoard[startingPosition[0]][startingPosition[1] - i] = newCoordinates;
+                    playerBoard[startingPosition[0]][startingPosition[1] - i] = { id: submarine.id, type: 'submarine', shot: null };
                 }
             } else if (direction === 'right') {
                 for (let i = 0; i < 3; i++) {
-                    const newCoordinates = [startingPosition[0], (startingPosition[1] + i)]
-                    playerBoard[startingPosition[0]][startingPosition[1] + i] = newCoordinates;
+                    playerBoard[startingPosition[0]][startingPosition[1] + i] = { id: submarine.id, type: 'submarine', shot: null };
                 }
             } else if (direction === 'up') {
                 for (let i = 0; i < 3; i++) {
-                    const newCoordinates = [startingPosition[0] - i, (startingPosition[1])]
-                    playerBoard[startingPosition[0] - i][startingPosition[1]] = newCoordinates;
+                    playerBoard[startingPosition[0] - i][startingPosition[1]] = { id: submarine.id, type: 'submarine', shot: null };
                 }
             } else if (direction === 'down') {
                 for (let i = 0; i < 3; i++) {
-                    const newCoordinates = [startingPosition[0] + i, (startingPosition[1])]
-                    playerBoard[startingPosition[0] + i][startingPosition[1]] = newCoordinates;
+                    playerBoard[startingPosition[0] + i][startingPosition[1]] = { id: submarine.id, type: 'submarine', shot: null };
                 }
             }
         }
@@ -204,9 +188,9 @@ const Gameboard = (function() {
         if (!directionStatus) {
             return 'Invalid direction received' 
         }
-    
+        
         const destroyer = BattleShip.ship(2, positionRow, positionColumn, direction)
-
+        
         const shipStatus = destroyer.shipValidity.shipStatus;
         if (!shipStatus ) {
             return 'Battleship is outside of bounds';
@@ -222,23 +206,19 @@ const Gameboard = (function() {
             const startingPosition = destroyer.position.coordinates;
             if (direction === 'left') {
                 for (let i = 0; i < 2; i++) {
-                    const newCoordinates = [startingPosition[0], (startingPosition[1] - i)]
-                    playerBoard[startingPosition[0]][startingPosition[1] - i] = newCoordinates;
+                    playerBoard[startingPosition[0]][startingPosition[1] - i] = { id: destroyer.id, type: 'destroyer', shot: null }
                 }
             } else if (direction === 'right') {
                 for (let i = 0; i < 2; i++) {
-                    const newCoordinates = [startingPosition[0], (startingPosition[1] + i)]
-                    playerBoard[startingPosition[0]][startingPosition[1] + i] = newCoordinates;
+                    playerBoard[startingPosition[0]][startingPosition[1] + i] = { id: destroyer.id, type: 'destroyer', shot: null }
                 }
             } else if (direction === 'up') {
                 for (let i = 0; i < 2; i++) {
-                    const newCoordinates = [startingPosition[0] - i, (startingPosition[1])]
-                    playerBoard[startingPosition[0] - i][startingPosition[1]] = newCoordinates;
+                    playerBoard[startingPosition[0] - i][startingPosition[1]] = { id: destroyer.id, type: 'destroyer', shot: null }
                 }
             } else if (direction === 'down') {
                 for (let i = 0; i < 2; i++) {
-                    const newCoordinates = [startingPosition[0] + i, (startingPosition[1])]
-                    playerBoard[startingPosition[0] + i][startingPosition[1]] = newCoordinates;
+                    playerBoard[startingPosition[0] + i][startingPosition[1]] = { id: destroyer.id, type: 'destroyer', shot: null }
                 }
             }
         }
@@ -252,7 +232,7 @@ const Gameboard = (function() {
         })
         let blankCoodinates = [];
         for (let i = 0; i < gameboardCoordinates.length; i++) {
-            blankCoodinates.push(null);
+            blankCoodinates.push({ id: null, type: null, shot: null });
         }
         if (JSON.stringify(gameboardCoordinates) !== JSON.stringify(blankCoodinates)) {
             occupied = true;
