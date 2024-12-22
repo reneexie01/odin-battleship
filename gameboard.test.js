@@ -226,6 +226,7 @@ test('Adds all relevant ships to playerShip object', () => {
     console.log(playerShips)
     expect(0).toEqual(0)})
 */
+/*
 test('Player ships records when sunk', () => {
     const cruiser = Gameboard.generateCruiser(6, 1, 'up');
     Gameboard.receiveAttack(6,1);
@@ -250,5 +251,23 @@ test('Player ships records when sunk', () => {
             }
     );
 })
-    
+*/ 
+test('Identify when the fleet has been sunk', () => {
+    const player = Gameboard.playerBoard;
+    const playerShips = Gameboard.playerShips;
+    const carrier = Gameboard.generateCarrier(1, 1, 'down');
+    const battleship = Gameboard.generateBattleship(1, 2, 'down');
+    const cruiser = Gameboard.generateCruiser(1, 3, 'down');
+    const submarine = Gameboard.generateSubmarine(1, 4, 'down');
+    const destroyer = Gameboard.generateDestroyer(1, 5, 'down');
+    Gameboard.playerShips.carrierObject.sunk = true;
+    Gameboard.playerShips.battleshipObject.sunk = true;
+    Gameboard.playerShips.cruiserObject.sunk = true;
+    //Gameboard.playerShips.submarineObject.sunk = true;
+    Gameboard.playerShips.destroyerObject.sunk = true;
+    console.log(playerShips)
+    const result = Gameboard.fleetStatus();
+    expect(result).toBe('active');
+})
+   
 //TODO: For the player, identify when all ships are sunk

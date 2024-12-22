@@ -252,6 +252,7 @@ const Gameboard = (function() {
             boardLocation.shot = 'hit';
             playerShips[`${boardLocation.type}Object`].hitCount++;
             playerShips[`${boardLocation.type}Object`].isSunk();
+            fleetStatus();
         } else if (boardLocation.type === null) {
             boardLocation.shot = 'miss';
         } else {
@@ -259,7 +260,17 @@ const Gameboard = (function() {
         }
     }
 
-    return { playerBoard, playerShips, generateCarrier, generateBattleship, generateCruiser, generateSubmarine, generateDestroyer, receiveAttack }
+    const fleetStatus = () => {
+        let status = 'inactive';
+        Object.entries(playerShips).forEach((ship) => {
+            if (!ship[1].sunk) {
+                status = 'active';
+            }
+        })
+        return status;
+    } 
+
+    return { playerBoard, playerShips, fleetStatus, generateCarrier, generateBattleship, generateCruiser, generateSubmarine, generateDestroyer, receiveAttack }
 
 })()
 
