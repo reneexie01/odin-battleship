@@ -275,4 +275,4 @@ const Gameboard = (function() {
 })()
 
 export { Gameboard };
-import { BattleShip } from "./ships";
+import { BattleShip } from "../ships.js";

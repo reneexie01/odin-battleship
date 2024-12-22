@@ -75,4 +75,4 @@ const BattleShip = (function() {
 })()
 
 export { BattleShip };
-import { toolsManager } from "./tools";
+import { toolsManager } from "./tools.js";
