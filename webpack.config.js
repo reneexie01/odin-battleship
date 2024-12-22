@@ -2,15 +2,23 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
-  entry: './src/index.js', 
+  entry: './src/index.js',
   output: {
-    path: path.resolve('dist'), 
-    filename: 'bundle.js', 
+    path: path.resolve('dist'),
+    filename: 'bundle.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/, 
+        use: ['style-loader', 'css-loader'], 
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html', 
+      template: './src/index.html',
     }),
   ],
-  mode: 'development', 
+  mode: 'development',
 };
