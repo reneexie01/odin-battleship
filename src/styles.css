@@ -1,3 +1,16 @@
 * {
     font-size: 12px;
 }
+
+.player1-board {
+    border: 1px solid black;
+    width: 300px;
+    height: 300px;
+    display: grid;
+    grid-template-columns: 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px;
+    grid-template-rows: 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px;
+}
+
+.row, .column {
+    border: 1px solid black;
+}

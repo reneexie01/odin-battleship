@@ -1,4 +1,22 @@
 const player1 = document.querySelector('.player1');
+const player1Board = document.querySelector('.player1-board');
+
+generateBoard(10);
+
+function generateBoard(num) {
+    for (let i = 0; i < num; i++) {
+        const row = document.createElement('div');
+        row.classList.add('row')
+        player1Board.appendChild(row);
+        for (let j = 0; j < num; j++) {
+            const column = document.createElement('div');
+            column.classList.add('column');
+            column.setAttribute('coordinates',`(${i},${j})`);
+            player1Board.appendChild(column);
+        }
+    }
+}
+
 const createPlayer = document.createElement('button');
 createPlayer.classList.add('player1-button')
 
@@ -39,11 +57,8 @@ createPlayer.addEventListener('click', () => {
     carrierColumnH2.appendChild(carrierColumn);
     carrierH1.appendChild(carrierDirectionH2);
     carrierDirectionH2.appendChild(carrierDirection);
+
 })
-
-
-
-//TODO: Figure out how to render the array as a grid on the DOM
 
 import { Gameboard } from "./gameboard.js";
 import './styles.css';
