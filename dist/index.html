@@ -6,7 +6,85 @@
     <title>Odin - Battleship</title>
 <script defer src="bundle.js"></script></head>
 <body>
-    <div class="player1"></div>
+    <div class="player1">
+        <div class="player1-fleet">
+            <div class="player1-carrier">
+                <h1>Carrier</h1>
+                <h2>Row: </h2><input class="player1-carrier-row" type="number" min="0" max="9" value="0">
+                <h2>Column:</h2><input class="player1-carrier-column" type="number" min="0" max="9" value="0">
+                <h2>Direction: </h2>
+                <div class="player1-carrier-direction" list="directions">
+                <select id="directions">
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="up">Up</option>
+                    <option value="down" selected>Down</option>
+                    </select>
+                </div>
+                <button class="carrier-submit">Submit</button>
+            </div>
+            <div class="player1-battleship">
+                <h1>Battleship</h1>
+                <h2>Row: </h2><input class="player1-battleship-row" type="number" min="0" max="9" value="0">
+                <h2>Column:</h2><input class="player1-battleship-column" type="number" min="0" max="9" value="1">
+                <h2>Direction: </h2>
+                <div class="player1-battleship-direction" list="directions">
+                <select id="directions">
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="up">Up</option>
+                    <option value="down" selected>Down</option>
+                    </select>
+                </div>
+                <button class="battleship-submit">Submit</button>
+            </div>
+            <div class="player1-cruiser">
+                <h1>Cruiser</h1>
+                <h2>Row: </h2><input class="player1-cruiser-row" type="number" min="0" max="9" value="0">
+                <h2>Column:</h2><input class="player1-cruiser-column" type="number" min="0" max="9" value="2">
+                <h2>Direction: </h2>
+                <div class="player1-cruiser-direction" list="directions">
+                <select id="directions">
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="up">Up</option>
+                    <option value="down" selected>Down</option>
+                    </select>
+                </div>
+                <button class="cruiser-submit">Submit</button>
+            </div>
+            <div class="player1-submarine">
+                <h1>Submarine</h1>
+                <h2>Row: </h2><input class="player1-submarine-row" type="number" min="0" max="9" value="0">
+                <h2>Column:</h2><input class="player1-submarine-column" type="number" min="0" max="9" value="3">
+                <h2>Direction: </h2>
+                <div class="player1-submarine-direction" list="directions">
+                <select id="directions">
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="up">Up</option>
+                    <option value="down" selected>Down</option>
+                    </select>
+                </div>
+                <button class="submarine-submit">Submit</button>
+            </div>
+            <div class="player1-destroyer">
+                <h1>Destroyer</h1>
+                <h2>Row: </h2><input class="player1-destroyer-row" type="number" min="0" max="9" value="0">
+                <h2>Column:</h2><input class="player1-destroyer-column" type="number" min="0" max="9" value="4">
+                <h2>Direction: </h2>
+                <div class="player1-destroyer-direction" list="directions">
+                <select id="directions">
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="up">Up</option>
+                    <option value="down" selected>Down</option>
+                    </select>
+                </div>
+                <button class="destroyer-submit">Submit</button>
+            </div>
+        </div>
+    </div>
     <div class="player1-board"></div>
 </body>
 </html>
