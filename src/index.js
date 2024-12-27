@@ -13,7 +13,8 @@ carrierSubmit.addEventListener('click', () => {
     const startingColumn = parseInt(carrierCoordinateColumn.value);
     const direction = document.querySelector('#directions').value;
 
-    const coordinatesArray = Gameboard.generateCarrier(startingRow, startingColumn, direction).shipValidity.coordinates;
+    Gameboard.generateCarrier(startingRow, startingColumn, direction);
+    const coordinatesArray = Gameboard.playerShips.carrierObject.shipValidity.coordinates;
     shipClass(coordinatesArray);
 
     })
@@ -28,7 +29,8 @@ battleshipSubmit.addEventListener('click', () => {
     const startingColumn = parseInt(battleshipCoordinateColumn.value);
     const direction = document.querySelector('#directions').value;
 
-    const coordinatesArray = Gameboard.generateBattleship(startingRow, startingColumn, direction).shipValidity.coordinates;
+    Gameboard.generateBattleship(startingRow, startingColumn, direction);
+    const coordinatesArray = Gameboard.playerShips.battleshipObject.shipValidity.coordinates;
     shipClass(coordinatesArray);
 
     })
@@ -43,7 +45,8 @@ cruiserSubmit.addEventListener('click', () => {
     const startingColumn = parseInt(cruiserCoordinateColumn.value);
     const direction = document.querySelector('#directions').value;
 
-    const coordinatesArray = Gameboard.generateCruiser(startingRow, startingColumn, direction).shipValidity.coordinates;
+    Gameboard.generateCruiser(startingRow, startingColumn, direction);
+    const coordinatesArray = Gameboard.playerShips.cruiserObject.shipValidity.coordinates;
     shipClass(coordinatesArray);
 
     })
@@ -58,7 +61,8 @@ submarineSubmit.addEventListener('click', () => {
     const startingColumn = parseInt(submarineCoordinateColumn.value);
     const direction = document.querySelector('#directions').value;
 
-    const coordinatesArray = Gameboard.generateSubmarine(startingRow, startingColumn, direction).shipValidity.coordinates;
+    Gameboard.generateSubmarine(startingRow, startingColumn, direction);
+    const coordinatesArray = Gameboard.playerShips.submarineObject.shipValidity.coordinates;
     shipClass(coordinatesArray);
 
     })
@@ -73,7 +77,8 @@ destroyerSubmit.addEventListener('click', () => {
     const startingColumn = parseInt(destroyerCoordinateColumn.value);
     const direction = document.querySelector('#directions').value;
 
-    const coordinatesArray = Gameboard.generateDestroyer(startingRow, startingColumn, direction).shipValidity.coordinates;
+    Gameboard.generateDestroyer(startingRow, startingColumn, direction);
+    const coordinatesArray = Gameboard.playerShips.destroyerObject.shipValidity.coordinates;
     shipClass(coordinatesArray);
 
     })
