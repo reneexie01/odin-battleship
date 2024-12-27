@@ -16,7 +16,7 @@ const Gameboard = (function() {
 
     const playerShips = {}
 
-    const generateCarrier = (positionRow, positionColumn, direction) => { 
+    const generateCarrier = (positionRow, positionColumn, direction, playerShips) => { 
         const directionStatus = BattleShip.directionValidation(direction)
         if (!directionStatus) {
             return 'Invalid direction received' 
