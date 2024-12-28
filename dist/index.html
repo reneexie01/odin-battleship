@@ -6,14 +6,14 @@
     <title>Odin - Battleship</title>
 <script defer src="bundle.js"></script></head>
 <body>
-    <h1>Battleship</h1>
+    <h1>Player 1</h1>
     <div class="player1">
         <div class="player1-fleet">
             <div class="player1-carrier">
-                <h1>Carrier</h1>
                 <div class="player1-carrier-input">
-                    <h2>Row: </h2><input class="player1-carrier-row" type="number" min="0" max="9" value="0">
-                    <h2>Column:</h2><input class="player1-carrier-column" type="number" min="0" max="9" value="0">
+                    <h1>Carrier</h1>
+                    <h2>Row: </h2><input class="player1-carrier-row" value="0">
+                    <h2>Column:</h2><input class="player1-carrier-column" value="1">
                     <h2>Direction: </h2>
                     <div class="player1-carrier-direction" list="directions">
                     <select id="directions">
@@ -27,10 +27,10 @@
                 </div>
             </div>
             <div class="player1-battleship">
-                <h1>Battleship</h1>
                 <div class="player1-battleship-input">
-                    <h2>Row: </h2><input class="player1-battleship-row" type="number" min="0" max="9" value="0">
-                    <h2>Column:</h2><input class="player1-battleship-column" type="number" min="0" max="9" value="1">
+                    <h1>Battleship</h1>
+                    <h2>Row: </h2><input class="player1-battleship-row" value="0">
+                    <h2>Column:</h2><input class="player1-battleship-column" value="2">
                     <h2>Direction: </h2>
                     <div class="player1-battleship-direction" list="directions">
                     <select id="directions">
@@ -44,10 +44,10 @@
                 </div>
             </div>
             <div class="player1-cruiser">
-                <h1>Cruiser</h1>
                 <div class="player1-cruiser-input">
-                    <h2>Row: </h2><input class="player1-cruiser-row" type="number" min="0" max="9" value="0">
-                    <h2>Column:</h2><input class="player1-cruiser-column" type="number" min="0" max="9" value="2">
+                    <h1>Cruiser</h1>
+                    <h2>Row: </h2><input class="player1-cruiser-row" value="0">
+                    <h2>Column:</h2><input class="player1-cruiser-column" value="3">
                     <h2>Direction: </h2>
                     <div class="player1-cruiser-direction" list="directions">
                     <select id="directions">
@@ -61,10 +61,10 @@
                 </div>
             </div>
             <div class="player1-submarine">
-                <h1>Submarine</h1>
                 <div class="player1-submarine-input">
-                    <h2>Row: </h2><input class="player1-submarine-row" type="number" min="0" max="9" value="0">
-                <h2>Column:</h2><input class="player1-submarine-column" type="number" min="0" max="9" value="3">
+                <h1>Submarine</h1>
+                <h2>Row: </h2><input class="player1-submarine-row" value="0">
+                <h2>Column:</h2><input class="player1-submarine-column" value="4">
                 <h2>Direction: </h2>
                 <div class="player1-submarine-direction" list="directions">
                 <select id="directions">
@@ -78,10 +78,10 @@
                 </div>
             </div>
             <div class="player1-destroyer">
-                <h1>Destroyer</h1>
                 <div class="player1-destroyer-input">
-                    <h2>Row: </h2><input class="player1-destroyer-row" type="number" min="0" max="9" value="0">
-                    <h2>Column:</h2><input class="player1-destroyer-column" type="number" min="0" max="9" value="4">
+                    <h1>Destroyer</h1>
+                    <h2>Row: </h2><input class="player1-destroyer-row" value="0">
+                    <h2>Column:</h2><input class="player1-destroyer-column" value="5">
                     <h2>Direction: </h2>
                     <div class="player1-destroyer-direction" list="directions">
                     <select id="directions">
@@ -97,14 +97,14 @@
         </div>
     </div>
     <div class="player1-board"></div>
-    <h1>Battleship</h1>
+    <h1>Player 2</h1>
     <div class="player2">
         <div class="player2-fleet">
             <div class="player2-carrier">
-                <h1>Carrier</h1>
                 <div class="player2-carrier-input">
-                    <h2>Row: </h2><input class="player2-carrier-row" type="number" min="0" max="9" value="0">
-                    <h2>Column:</h2><input class="player2-carrier-column" type="number" min="0" max="9" value="0">
+                    <h1>Carrier</h1>
+                    <h2>Row: </h2><input class="player2-carrier-row" value="0">
+                    <h2>Column:</h2><input class="player2-carrier-column" value="1">
                     <h2>Direction: </h2>
                     <div class="player2-carrier-direction" list="directions">
                     <select id="directions">
@@ -118,10 +118,10 @@
                 </div>
             </div>
             <div class="player2-battleship">
-                <h1>Battleship</h1>
                 <div class="player2-battleship-input">
-                    <h2>Row: </h2><input class="player2-battleship-row" type="number" min="0" max="9" value="0">
-                    <h2>Column:</h2><input class="player2-battleship-column" type="number" min="0" max="9" value="1">
+                    <h1>Battleship</h1>
+                    <h2>Row: </h2><input class="player2-battleship-row" value="0">
+                    <h2>Column:</h2><input class="player2-battleship-column" value="2">
                     <h2>Direction: </h2>
                     <div class="player2-battleship-direction" list="directions">
                     <select id="directions">
@@ -135,10 +135,10 @@
                 </div>
             </div>
             <div class="player2-cruiser">
-                <h1>Cruiser</h1>
                 <div class="player2-cruiser-input">
-                    <h2>Row: </h2><input class="player2-cruiser-row" type="number" min="0" max="9" value="0">
-                    <h2>Column:</h2><input class="player2-cruiser-column" type="number" min="0" max="9" value="2">
+                    <h1>Cruiser</h1>
+                    <h2>Row: </h2><input class="player2-cruiser-row" value="0">
+                    <h2>Column:</h2><input class="player2-cruiser-column" value="3">
                     <h2>Direction: </h2>
                     <div class="player2-cruiser-direction" list="directions">
                     <select id="directions">
@@ -152,10 +152,10 @@
                 </div>
             </div>
             <div class="player2-submarine">
-                <h1>Submarine</h1>
                 <div class="player2-submarine-input">
-                    <h2>Row: </h2><input class="player2-submarine-row" type="number" min="0" max="9" value="0">
-                <h2>Column:</h2><input class="player2-submarine-column" type="number" min="0" max="9" value="3">
+                <h1>Submarine</h1>
+                <h2>Row: </h2><input class="player2-submarine-row" value="0">
+                <h2>Column:</h2><input class="player2-submarine-column" value="4">
                 <h2>Direction: </h2>
                 <div class="player2-submarine-direction" list="directions">
                 <select id="directions">
@@ -169,10 +169,10 @@
                 </div>
             </div>
             <div class="player2-destroyer">
-                <h1>Destroyer</h1>
                 <div class="player2-destroyer-input">
-                    <h2>Row: </h2><input class="player2-destroyer-row" type="number" min="0" max="9" value="0">
-                    <h2>Column:</h2><input class="player2-destroyer-column" type="number" min="0" max="9" value="4">
+                    <h1>Destroyer</h1>
+                    <h2>Row: </h2><input class="player2-destroyer-row" value="0">
+                    <h2>Column:</h2><input class="player2-destroyer-column" value="5">
                     <h2>Direction: </h2>
                     <div class="player2-destroyer-direction" list="directions">
                     <select id="directions">
