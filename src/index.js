@@ -6,8 +6,6 @@ const player1PlayerShips = Gameboard.playerShips;
 player1DOMGameboard
 player1Gameboard;
 
-//TODO: Need to limit to one response only - right now you can create as many ships as you want.
-//TODO: The ships replace each other too - validation for occupied placements aren't working.
 //TODO: Switch hidden to the next player when submit button is clicked.
 
 // Carrier
@@ -24,13 +22,18 @@ p1carrierSubmit.addEventListener('click', () => {
     if (startingRow > 9 || startingRow < 0 || startingColumn > 9 || startingColumn < 0) {
         console.log('Please submit a valid coordinate');
     } else {
-        Gameboard.generateCarrier(startingRow, startingColumn, direction, player1PlayerShips);
-        const p1coordinatesArray = player1PlayerShips.carrierObject.shipValidity.coordinates;
-        shipClass('p1', p1coordinatesArray);
-    
-        console.log(player1Gameboard);
-        console.log(player1PlayerShips);
-        p1carrierInput.classList.add('hidden')
+        const ship = Gameboard.generateCarrier(startingRow, startingColumn, direction, player1PlayerShips);
+        if (ship === 'Coordinates are occupied') {
+            console.log('Coordinates are occupied');
+            return;
+        } else {
+            const p1coordinatesArray = player1PlayerShips.carrierObject.shipValidity.coordinates;
+            shipClass('p1', p1coordinatesArray);
+        
+            console.log(player1Gameboard);
+            console.log(player1PlayerShips);
+            p1carrierInput.classList.add('hidden')
+        }
     }
     })
 
@@ -46,14 +49,19 @@ p1battleshipSubmit.addEventListener('click', () => {
     const direction = document.querySelector('#directions').value;
     if (startingRow > 9 || startingRow < 0 || startingColumn > 9 || startingColumn < 0) {
         console.log('Please submit a valid coordinate');
+        return;
     } else {
-        Gameboard.generateBattleship(startingRow, startingColumn, direction, player1PlayerShips);
-        const p1coordinatesArray = player1PlayerShips.battleshipObject.shipValidity.coordinates;
-        shipClass('p1', p1coordinatesArray);
-
-        console.log(player1Gameboard);
-        console.log(player1PlayerShips);
-        p1battleshipInput.classList.add('hidden')
+        const ship = Gameboard.generateBattleship(startingRow, startingColumn, direction, player1PlayerShips);
+        if (ship === 'Coordinates are occupied') {
+            console.log('Coordinates are occupied');
+        } else {
+            const p1coordinatesArray = player1PlayerShips.battleshipObject.shipValidity.coordinates;
+            shipClass('p1', p1coordinatesArray);
+    
+            console.log(player1Gameboard);
+            console.log(player1PlayerShips);
+            p1battleshipInput.classList.add('hidden')
+        }
     }
     })
     
@@ -70,13 +78,18 @@ p1cruiserSubmit.addEventListener('click', () => {
     if (startingRow > 9 || startingRow < 0 || startingColumn > 9 || startingColumn < 0) {
         console.log('Please submit a valid coordinate');
     } else {
-        Gameboard.generateCruiser(startingRow, startingColumn, direction, player1PlayerShips);
-        const p1coordinatesArray = player1PlayerShips.cruiserObject.shipValidity.coordinates;
-        shipClass('p1', p1coordinatesArray);
-
-        console.log(player1Gameboard);
-        console.log(player1PlayerShips);
-        p1cruiserInput.classList.add('hidden')
+        const ship = Gameboard.generateCruiser(startingRow, startingColumn, direction, player1PlayerShips);
+        if (ship === 'Coordinates are occupied') {
+            console.log('Coordinates are occupied');
+            return;
+        } else {
+            const p1coordinatesArray = player1PlayerShips.cruiserObject.shipValidity.coordinates;
+            shipClass('p1', p1coordinatesArray);
+    
+            console.log(player1Gameboard);
+            console.log(player1PlayerShips);
+            p1cruiserInput.classList.add('hidden')
+        }
     }
     })
 
@@ -93,13 +106,18 @@ p1submarineSubmit.addEventListener('click', () => {
     if (startingRow > 9 || startingRow < 0 || startingColumn > 9 || startingColumn < 0) {
         console.log('Please submit a valid coordinate');
     } else {
-        Gameboard.generateSubmarine(startingRow, startingColumn, direction, player1PlayerShips);
-        const p1coordinatesArray = player1PlayerShips.submarineObject.shipValidity.coordinates;
-        shipClass('p1', p1coordinatesArray);
-
-        console.log(player1Gameboard);
-        console.log(player1PlayerShips);
-        p1submarineInput.classList.add('hidden')
+        const ship = Gameboard.generateSubmarine(startingRow, startingColumn, direction, player1PlayerShips);
+        if (ship === 'Coordinates are occupied') {
+            console.log('Coordinates are occupied');
+            return;
+        } else {
+            const p1coordinatesArray = player1PlayerShips.submarineObject.shipValidity.coordinates;
+            shipClass('p1', p1coordinatesArray);
+    
+            console.log(player1Gameboard);
+            console.log(player1PlayerShips);
+            p1submarineInput.classList.add('hidden')
+        }
     }
     })
 
@@ -117,13 +135,18 @@ p1destroyerSubmit.addEventListener('click', () => {
     if (startingRow > 9 || startingRow < 0 || startingColumn > 9 || startingColumn < 0) {
         console.log('Please submit a valid coordinate');
     } else {
-        Gameboard.generateDestroyer(startingRow, startingColumn, direction, player1PlayerShips);
-        const p1coordinatesArray = player1PlayerShips.destroyerObject.shipValidity.coordinates;
-        shipClass('p1', p1coordinatesArray);
-
-        console.log(player1Gameboard);
-        console.log(player1PlayerShips);
-        p1destroyerInput.classList.add('hidden')
+        const ship = Gameboard.generateDestroyer(startingRow, startingColumn, direction, player1PlayerShips);
+        if (ship === 'Coordinates are occupied') {
+            console.log('Coordinates are occupied');
+            return;
+        } else {
+            const p1coordinatesArray = player1PlayerShips.destroyerObject.shipValidity.coordinates;
+            shipClass('p1', p1coordinatesArray);
+    
+            console.log(player1Gameboard);
+            console.log(player1PlayerShips);
+            p1destroyerInput.classList.add('hidden')
+        }
     }
     })
 
@@ -149,13 +172,18 @@ p2carrierSubmit.addEventListener('click', () => {
     if (startingRow > 9 || startingRow < 0 || startingColumn > 9 || startingColumn < 0) {
         console.log('Please submit a valid coordinate');
     } else {
-        Gameboard.generateCarrier(startingRow, startingColumn, direction, player2PlayerShips);
-        const p2coordinatesArray = player2PlayerShips.carrierObject.shipValidity.coordinates;
-        shipClass('p2', p2coordinatesArray);
-
-        console.log(player2Gameboard);
-        console.log(player2PlayerShips);
-        p2carrierInput.classList.add('hidden')
+        const ship = Gameboard.generateCarrier(startingRow, startingColumn, direction, player2PlayerShips);
+        if (ship === 'Coordinates are occupied') {
+            console.log('Coordinates are occupied');
+            return;
+        } else {
+            const p2coordinatesArray = player2PlayerShips.carrierObject.shipValidity.coordinates;
+            shipClass('p2', p2coordinatesArray);
+    
+            console.log(player2Gameboard);
+            console.log(player2PlayerShips);
+            p2carrierInput.classList.add('hidden')
+        }
     }
     })
 
@@ -173,13 +201,18 @@ p2battleshipSubmit.addEventListener('click', () => {
     if (startingRow > 9 || startingRow < 0 || startingColumn > 9 || startingColumn < 0) {
         console.log('Please submit a valid coordinate');
     } else {
-        Gameboard.generateBattleship(startingRow, startingColumn, direction, player2PlayerShips);
-        const p2coordinatesArray = player2PlayerShips.battleshipObject.shipValidity.coordinates;
-        shipClass('p2', p2coordinatesArray);
-
-        console.log(player2Gameboard);
-        console.log(player2PlayerShips);
-        p2battleshipInput.classList.add('hidden')
+        const ship = Gameboard.generateBattleship(startingRow, startingColumn, direction, player2PlayerShips);
+        if (ship === 'Coordinates are occupied') {
+            console.log('Coordinates are occupied');
+            return;
+        } else {
+            const p2coordinatesArray = player2PlayerShips.battleshipObject.shipValidity.coordinates;
+            shipClass('p2', p2coordinatesArray);
+    
+            console.log(player2Gameboard);
+            console.log(player2PlayerShips);
+            p2battleshipInput.classList.add('hidden')
+        }
     }
     })
     
@@ -197,13 +230,18 @@ p2cruiserSubmit.addEventListener('click', () => {
     if (startingRow > 9 || startingRow < 0 || startingColumn > 9 || startingColumn < 0) {
         console.log('Please submit a valid coordinate');
     } else {
-        Gameboard.generateCruiser(startingRow, startingColumn, direction, player2PlayerShips);
-        const p2coordinatesArray = player2PlayerShips.cruiserObject.shipValidity.coordinates;
-        shipClass('p2', p2coordinatesArray);
-
-        console.log(player2Gameboard);
-        console.log(player2PlayerShips);
-        p2cruiserInput.classList.add('hidden')
+        const ship = Gameboard.generateCruiser(startingRow, startingColumn, direction, player2PlayerShips);
+        if (ship === 'Coordinates are occupied') {
+            console.log('Coordinates are occupied');
+            return;
+        } else {
+            const p2coordinatesArray = player2PlayerShips.cruiserObject.shipValidity.coordinates;
+            shipClass('p2', p2coordinatesArray);
+    
+            console.log(player2Gameboard);
+            console.log(player2PlayerShips);
+            p2cruiserInput.classList.add('hidden')
+        }
     }
     })
 
@@ -221,13 +259,18 @@ p2submarineSubmit.addEventListener('click', () => {
     if (startingRow > 9 || startingRow < 0 || startingColumn > 9 || startingColumn < 0) {
         console.log('Please submit a valid coordinate');
     } else {
-        Gameboard.generateSubmarine(startingRow, startingColumn, direction, player2PlayerShips);
-        const p2coordinatesArray = player2PlayerShips.submarineObject.shipValidity.coordinates;
-        shipClass('p2', p2coordinatesArray);
-
-        console.log(player2Gameboard);
-        console.log(player2PlayerShips);
-        p2submarineInput.classList.add('hidden')
+        const ship = Gameboard.generateSubmarine(startingRow, startingColumn, direction, player2PlayerShips);
+        if (ship === 'Coordinates are occupied') {
+            console.log('Coordinates are occupied');
+            return;
+        } else {
+            const p2coordinatesArray = player2PlayerShips.submarineObject.shipValidity.coordinates;
+            shipClass('p2', p2coordinatesArray);
+    
+            console.log(player2Gameboard);
+            console.log(player2PlayerShips);
+            p2submarineInput.classList.add('hidden')
+        }
     }
     })
 
@@ -245,13 +288,18 @@ p2destroyerSubmit.addEventListener('click', () => {
     if (startingRow > 9 || startingRow < 0 || startingColumn > 9 || startingColumn < 0) {
         console.log('Please submit a valid coordinate');
     } else {
-    Gameboard.generateDestroyer(startingRow, startingColumn, direction, player2PlayerShips);
-        const p2coordinatesArray = player2PlayerShips.destroyerObject.shipValidity.coordinates;
-        shipClass('p2', p2coordinatesArray);
-
-        console.log(player2Gameboard);
-        console.log(player2PlayerShips);
-        p2destroyerInput.classList.add('hidden')
+        const ship = Gameboard.generateDestroyer(startingRow, startingColumn, direction, player2PlayerShips);
+        if (ship === 'Coordinates are occupied') {
+            console.log('Coordinates are occupied');
+            return;
+        } else {
+            const p2coordinatesArray = player2PlayerShips.destroyerObject.shipValidity.coordinates;
+            shipClass('p2', p2coordinatesArray);
+    
+            console.log(player2Gameboard);
+            console.log(player2PlayerShips);
+            p2destroyerInput.classList.add('hidden')
+        }
     }
     })
 

@@ -19,10 +19,6 @@
     display: flex; 
 }
 
-.spacer {
-    width: 100%;
-}
-
 .column {
     width: 30px;
     height: 30px;
