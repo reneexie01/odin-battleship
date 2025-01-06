@@ -8,7 +8,24 @@ const Gameboard = () => {
     const gameboard = { 
         id: toolsManager.generateUniqueId(),
         array: [],
+        receiveAttack(coordinates) {
+        const targetedCoordinates = gameboard.array[coordinates[0]][coordinates[1]];
+            if (targetedCoordinates.id === null) {
+                targetedCoordinates.shot = 'miss';
+            } else if (targetedCoordinates.id !== null && targetedCoordinates.shot !== 'hit') {
+                playerFleet.forEach((ship) => {
+                    if (ship.id === targetedCoordinates.id) {
+                        ship.hit();
+                        console.log(ship)
+                    }
+                })
+                targetedCoordinates.shot = 'hit';
+            } else {
+                return;
+            }
+        }
      }
+
     for (let i = 0; i < num; i++) {
         gameboard.array.push([]);
         for (let j = 0; j < num; j++) {
@@ -22,15 +39,21 @@ const Gameboard = () => {
     const submarine = Ship(3, [3,9], "left");
     const destroyer = Ship(2, [8,4], "down");
 
-    console.log(`carrier: ${carrier.id}`, `battleship: ${battleship.id}`, `cruiser: ${cruiser.id}`, `submarine: ${submarine.id}`, `destroyer: ${destroyer.id}`);
+    const playerFleet = [
+        carrier,
+        battleship,
+        cruiser,
+        submarine,
+        destroyer
+    ]
+
     addToBoard(gameboard, carrier);
     addToBoard(gameboard, battleship);
     addToBoard(gameboard, cruiser);
     addToBoard(gameboard, submarine);
     addToBoard(gameboard, destroyer);
 
-//TODO: Place ships generated on the board and validate if the coordinates are 
-// occupied and within the bounds of the board
+//TODO: Place ships generated on the board and validate if the coordinates are within the bounds of the board.
 
     return gameboard;
 }
@@ -74,4 +97,3 @@ function isOccupied(gameboard, ship, occupied) {
     }
     return isOccupied;
 }
-
