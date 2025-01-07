@@ -1,24 +1,40 @@
 import { toolsManager } from "./tools";
 export { Ship };
 
-const Ship = (length, [row, column], direction) => {
+const Ship = (name, length, [row, column], direction) => {
+    let hits = 0;
+    let sunk = false;
+
+    const hitCount = () => {
+        return hits;
+    }
+
+    const hit = () => {
+        if(!sunk) {
+            hits++;
+            isSunk();
+        }
+        return hits;
+    }
+
+    const isSunk = () => {
+        if (hits === length) {
+            sunk = true;
+        }
+    }
+
+    const sunkStatus = () => {
+        return sunk;
+    }
+
     return {
         id: toolsManager.generateUniqueId(),
+        name: name,
         length: length,
-        hitCount: 0,
-        sunk: false,
-        hit() {
-            if(!this.sunk) {
-                this.hitCount++;
-                this.isSunk();
-            }
-            return this;
-        },
-        isSunk() {
-            if (this.hitCount === this.length) {
-                this.sunk = true;
-            }
-        },
+        hitCount,
+        hit,
+        isSunk,
+        sunkStatus,
         coordinates: coordinates([row, column], length, direction),
         direction: direction,
     }

@@ -23,9 +23,13 @@ const Gameboard = () => {
             } else {
                 return;
             }
+        },
+        getFleet() {
+            return playerFleet;
         }
      }
 
+     //TODO: Check if ships correctly record sunk ship
     for (let i = 0; i < num; i++) {
         gameboard.array.push([]);
         for (let j = 0; j < num; j++) {
@@ -33,11 +37,11 @@ const Gameboard = () => {
         }
     }
 
-    const carrier = Ship(5, [9,9], "up");
-    const battleship = Ship(4, [6,9], "down");
-    const cruiser = Ship(3, [1,2], "down");
-    const submarine = Ship(3, [3,9], "left");
-    const destroyer = Ship(2, [8,4], "down");
+    const carrier = Ship('carrier', 5, [9,9], "up");
+    const battleship = Ship('battleship', 4, [6,9], "down");
+    const cruiser = Ship('cruiser', 3, [1,2], "down");
+    const submarine = Ship('submarine', 3, [3,9], "left");
+    const destroyer = Ship('destroyer', 2, [8,4], "down");
 
     const playerFleet = [
         carrier,

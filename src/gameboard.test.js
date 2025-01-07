@@ -9,11 +9,11 @@ test('Returns a 10x10 gameboard', () => {
 })
 */
 /* TODO: Add to Gameboard function on gameboard.js
-    const carrier = Ship(5, [0,0], "down");
-    const battleship = Ship(4, [0,1], "down");
-    const cruiser = Ship(3, [0,2], "down");
-    const submarine = Ship(3, [0,3], "down");
-    const destroyer = Ship(2, [0,4], "down");
+    const carrier = Ship('carrier', 5, [0,0], "down");
+    const battleship = Ship('battleship', 4, [0,1], "down");
+    const cruiser = Ship('cruiser', 3, [0,2], "down");
+    const submarine = Ship('submarine', 3, [0,3], "down");
+    const destroyer = Ship('destroyer', 2, [0,4], "down");
 */
 /*
 test('Generates the ships on the board', () => {
@@ -44,11 +44,11 @@ test('Generates the ships on the board', () => {
 })
 */
 /* TODO: Add to Gameboard function on gameboard.js
-    const carrier = Ship(5, [9,9], "up");
-    const battleship = Ship(4, [0,1], "right");
-    const cruiser = Ship(3, [1,2], "down");
-    const submarine = Ship(3, [3,9], "left");
-    const destroyer = Ship(2, [8,4], "down");
+    const carrier = Ship('carrier', 5, [9,9], "up");
+    const battleship = Ship('battleship', 4, [0,1], "right");
+    const cruiser = Ship('cruiser', 3, [1,2], "down");
+    const submarine = Ship('submarine', 3, [3,9], "left");
+    const destroyer = Ship('destroyer', 2, [8,4], "down");
 */
 /*
 test('Tests other directions add ships correctly on the board', () => {
@@ -103,6 +103,7 @@ test('Tests if a miss is correctly recorded on the gameboard', () => {
     gameboard1.receiveAttack([9,9]);
     gameboard1.receiveAttack([9,9]);
     console.log(gameboard1.array);
+    console.log('Fleet:', gameboard1.getFleet());
     expect(gameboard1.array[0][0].shot).toEqual('miss');
     expect(gameboard1.array[9][9].shot).toEqual('hit');
 })
