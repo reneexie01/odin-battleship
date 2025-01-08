@@ -8,28 +8,26 @@ const Gameboard = () => {
     const gameboard = { 
         id: toolsManager.generateUniqueId(),
         array: [],
+        playerFleet: [],
         receiveAttack(coordinates) {
         const targetedCoordinates = gameboard.array[coordinates[0]][coordinates[1]];
             if (targetedCoordinates.id === null) {
                 targetedCoordinates.shot = 'miss';
             } else if (targetedCoordinates.id !== null && targetedCoordinates.shot !== 'hit') {
-                playerFleet.forEach((ship) => {
+                gameboard.playerFleet.forEach((ship) => {
                     if (ship.id === targetedCoordinates.id) {
                         ship.hit();
-                        console.log(ship)
                     }
                 })
                 targetedCoordinates.shot = 'hit';
             } else {
                 return;
             }
+            fleetStatusChecker(); // Notes: Checks if all ships in the fleet are sunk
         },
-        getFleet() {
-            return playerFleet;
-        }
+        fleetStatus: true,
      }
-
-     //TODO: Check if ships correctly record sunk ship
+     
     for (let i = 0; i < num; i++) {
         gameboard.array.push([]);
         for (let j = 0; j < num; j++) {
@@ -37,13 +35,32 @@ const Gameboard = () => {
         }
     }
 
+    function fleetStatusChecker() {
+        const playerFleet = gameboard.playerFleet;
+        const carrierSunkStatus = playerFleet[0].sunkStatus();
+        const battleshipSunkStatus = playerFleet[1].sunkStatus();
+        const cruiserSunkStatus = playerFleet[2].sunkStatus();
+        const submarineSunkStatus = playerFleet[3].sunkStatus();
+        const destroyerSunkStatus = playerFleet[4].sunkStatus();
+
+        if (
+            carrierSunkStatus === true &&
+            battleshipSunkStatus === true &&
+            cruiserSunkStatus === true &&
+            submarineSunkStatus === true &&
+            destroyerSunkStatus === true
+        ) {
+            gameboard.fleetStatus = false; 
+        }
+    }
+
     const carrier = Ship('carrier', 5, [9,9], "up");
-    const battleship = Ship('battleship', 4, [6,9], "down");
+    const battleship = Ship('battleship', 4, [0,1], "right");
     const cruiser = Ship('cruiser', 3, [1,2], "down");
     const submarine = Ship('submarine', 3, [3,9], "left");
     const destroyer = Ship('destroyer', 2, [8,4], "down");
 
-    const playerFleet = [
+    gameboard.playerFleet = [
         carrier,
         battleship,
         cruiser,
@@ -70,8 +87,8 @@ function addToBoard(gameboard, ship) {
     occupied = isOccupied(gameboard, ship, occupied);
 
     if (occupied) {
-        console.log(`${ship.id} has not been added.`)
-        return; // Does not add the ship to the board if any of the coordinates are occupied
+        console.log(`${ship.name} ${ship.id} has not been added.`)
+        return; // Notes: Does not add the ship to the board if any of the coordinates are occupied
     } else {
         coordinates.forEach((coordinate) => {
             let gameboardCoordinate = gameboard.array[coordinate[0]][coordinate[1]];

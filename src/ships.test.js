@@ -9,7 +9,18 @@ test('Records 2 hits to the ship', () => {
     expect(ship.sunkStatus()).toBe(false);
 })
 
-test('Records 4 hits to a ship and sunk is false', () => {
+test('Correctly returns sunkStatus', () => {
+    const ship1 = Ship('battleship', 4, [0,0], 'right');
+    ship1.hit();
+    ship1.hit();
+    expect(ship1.sunkStatus()).toBe(false);
+    ship1.hit();
+    ship1.hit();
+    ship1.hit();
+    expect(ship1.sunkStatus()).toBe(true);
+})
+
+test('Records 4 hits to a ship and sunk is true', () => {
     const ship1 = Ship('battleship', 4, [0,0], 'right');
     ship1.hit();
     ship1.hit();
