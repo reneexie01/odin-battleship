@@ -1,5 +1,5 @@
-import { toolsManager } from "./tools";
-import { Ship } from "./ships";
+import { toolsManager } from "./tools.js";
+import { Ship } from "./ships.js";
 
 export { Gameboard };
 
@@ -31,7 +31,7 @@ const Gameboard = () => {
     for (let i = 0; i < num; i++) {
         gameboard.array.push([]);
         for (let j = 0; j < num; j++) {
-            gameboard.array[i].push({ cellId: toolsManager.generateUniqueId(), id: null, shot: null });
+            gameboard.array[i].push({ cellId: toolsManager.generateUniqueId(), id: null, shot: null, coordinates: [i,j] });
         }
     }
 
@@ -56,7 +56,7 @@ const Gameboard = () => {
 
     const carrier = Ship('carrier', 5, [9,9], "up");
     const battleship = Ship('battleship', 4, [0,1], "right");
-    const cruiser = Ship('cruiser', 3, [1,2], "down");
+    const cruiser = Ship('cruiser', 3, [3,2], "down");
     const submarine = Ship('submarine', 3, [3,9], "left");
     const destroyer = Ship('destroyer', 2, [8,4], "down");
 

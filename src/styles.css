@@ -1,4 +1,4 @@
-.player1-gameboard {
+.player1-gameboard, .player2-gameboard {
     display: flex;
     flex-wrap: wrap;
     border: 1px solid black;
@@ -10,4 +10,8 @@
     border: 1px solid black;
     width: 28px;
     height: 28px;
+}
+
+.occupied {
+    background-color: red;
 }

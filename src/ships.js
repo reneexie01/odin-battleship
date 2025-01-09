@@ -1,4 +1,4 @@
-import { toolsManager } from "./tools";
+import { toolsManager } from "./tools.js";
 export { Ship };
 
 const Ship = (name, length, [row, column], direction) => {
