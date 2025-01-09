@@ -13,5 +13,13 @@
 }
 
 .occupied {
+    background-color: green;
+}
+
+.hit {
     background-color: red;
+}
+
+.miss {
+    background-color: gray;
 }
