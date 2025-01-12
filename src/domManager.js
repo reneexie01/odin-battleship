@@ -73,7 +73,6 @@ const DomManager = () => {
 
     function turnSwitcher() {
         playerTurn = playerTurn === 1 ? 2 : 1;
-        console.log(`Turn switched to player ${playerTurn}`);
     }
 
     function getPlayerTurn() {

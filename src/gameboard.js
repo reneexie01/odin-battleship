@@ -54,11 +54,11 @@ const Gameboard = () => {
         }
     }
 
-    const carrier = Ship('carrier', 5, [9,9], "up");
-    const battleship = Ship('battleship', 4, [0,1], "right");
-    const cruiser = Ship('cruiser', 3, [3,2], "down");
-    const submarine = Ship('submarine', 3, [3,9], "left");
-    const destroyer = Ship('destroyer', 2, [8,4], "down");
+    const carrier = Ship('carrier', 5, [0,0], "down");
+    const battleship = Ship('battleship', 4, [0,1], "down");
+    const cruiser = Ship('cruiser', 3, [0,2], "down");
+    const submarine = Ship('submarine', 3, [0,3], "down");
+    const destroyer = Ship('destroyer', 2, [0,4], "down");
 
     gameboard.playerFleet = [
         carrier,
