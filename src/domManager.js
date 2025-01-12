@@ -62,10 +62,15 @@ const DomManager = () => {
         function attackHandler(e) {
             const row = e.target.getAttribute('row');
             const column = e.target.getAttribute('column');
-            player.gameboard.receiveAttack([row, column]);
-            renderBoardShots(player);
-            turnSwitcher();
-            gameboard.removeEventListener('click', attackHandler)
+            if (player.gameboard.array[row][column].shot) {
+                console.log('Coordinates have already been shot');
+                return;
+            } else {
+                player.gameboard.receiveAttack([row, column]);
+                renderBoardShots(player);
+                turnSwitcher();
+                gameboard.removeEventListener('click', attackHandler);
+            }
         }
 
       gameboard.addEventListener('click', attackHandler);

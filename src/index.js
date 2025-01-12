@@ -31,7 +31,7 @@ function startGame() {
         player1Container.classList.remove('hidden');
         switchPlayerButton.classList.remove('hidden');
         domManager.attackShip(player1Gameboard, player1);
-        playerTurnText.innerHTML = `Player 2's turn`;
+        playerTurnText.innerHTML = `Player 2's turn (You)`;
     })
 }
 
@@ -42,7 +42,6 @@ function switchPlayer() {
             player1Container.classList.add('hidden');
             player2Container.classList.remove('hidden');
             playerTurnText.innerHTML = `Player 1's turn (Computer)`
-            // domManager.attackShip(player2Gameboard, player2); // TODO: Fix this as it does not work - computer generated coordinates.
             ComputerPlayer().computerAttackShip(player2, domManager);
             winnerChecker();
             console.log(player1.gameboard.array)
@@ -50,23 +49,23 @@ function switchPlayer() {
         } else if (turn === 2) {
             player2Container.classList.add('hidden');
             player1Container.classList.remove('hidden');
-            playerTurnText.innerHTML = `Player 2's turn`
+            playerTurnText.innerHTML = `Player 2's turn (You)`
             domManager.attackShip(player1Gameboard, player1);
             winnerChecker(); 
             console.log(player1.gameboard.array)
             console.log(player2.gameboard.array)
         }
     });
-}
+} // TOFIX: If you click switch player multiple times, it allows you to hit the board multiple times
 
 function winnerChecker() {
     if (!player1.gameboard.fleetStatus) {
-        winningAnnouncement.innerHTML = 'Player 1 Lost';
+        winningAnnouncement.innerHTML = 'Player 1 (Computer) Lost';
         winningAnnouncement.classList.remove('hidden');
         player1Container.classList.remove('hidden');
         player2Container.classList.remove('hidden');
     } else if (!player2.gameboard.fleetStatus) {
-        winningAnnouncement.innerHTML = 'Player 2 Lost';
+        winningAnnouncement.innerHTML = 'Player 2 (You) Lost';
         winningAnnouncement.classList.remove('hidden');
         player1Container.classList.remove('hidden');
         player2Container.classList.remove('hidden');

@@ -1,20 +1,24 @@
-import { DomManager } from "./domManager.js";
 export { ComputerPlayer };
 
 const ComputerPlayer = () => {
     
     function computerAttackShip(player, dom) {
-        const row = randomNumberGenerator(0,9)
-        const column = randomNumberGenerator(0,9)
+        let row = randomNumberGenerator(0,2)
+        let column = randomNumberGenerator(0,2)
         console.log([row, column]);
-        player.gameboard.receiveAttack([row, column]);
-        dom.renderBoardShots(player);
-        dom.turnSwitcher();
+        if (player.gameboard.array[row][column].shot) {
+            console.log('Coordinates have already been shot... generating new numbers');
+            computerAttackShip(player, dom);
+        } else {
+            player.gameboard.receiveAttack([row, column]);
+            dom.renderBoardShots(player);
+            dom.turnSwitcher();
+        }
     }
 
     function randomNumberGenerator(max, min) {
         return Math.round(Math.random() * (max - min) + min, 0);
-    }    
+    }
 
     return { computerAttackShip };
 }
