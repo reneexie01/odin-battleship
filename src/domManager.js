@@ -2,6 +2,8 @@ export { DomManager };
 
 const DomManager = () => {
 
+    let playerTurn = 2;
+
     function createGameboard(gameboard, player) {
         for (let i = 0; i < 10; i++) {
             for (let j = 0; j < 10; j++) {
@@ -48,26 +50,37 @@ const DomManager = () => {
     
                     const occupiedCell = document.querySelector(`.${player.name}[row='${cellRow}'][column='${cellColumn}']`);
                     occupiedCell.classList.add('miss');
+                } else {
+                    return;
                 }
             })
         })
     }
 
     function attackShip(gameboard, player) {
-      gameboard.addEventListener('click', (e) => {
-        console.log(e.target)
-        const row = e.target.getAttribute('row');
-        const column = e.target.getAttribute('column');
-        player.gameboard.receiveAttack([row, column]);
-        console.log(player.gameboard.array);
-        renderBoardShots(player);
-      })
+
+        function attackHandler(e) {
+            const row = e.target.getAttribute('row');
+            const column = e.target.getAttribute('column');
+            player.gameboard.receiveAttack([row, column]);
+            renderBoardShots(player);
+            turnSwitcher();
+            gameboard.removeEventListener('click', attackHandler)
+        }
+
+      gameboard.addEventListener('click', attackHandler);
     }
 
-    return { createGameboard, attackShip }
+    function turnSwitcher() {
+        playerTurn = playerTurn === 1 ? 2 : 1;
+        console.log(`Turn switched to player ${playerTurn}`);
+    }
+
+    function getPlayerTurn() {
+        return playerTurn;
+    }
+
+    return { createGameboard, attackShip, getPlayerTurn, turnSwitcher }
 }
 
-// TODO: Add a turn controller to add a forEach event listener to the relevant player's board
-// Add an indicator of whose turn it is
-// On click display a colour depending on the shot in the gameboard.array.shot 
-// Remove the occupied class or CSS so the other player can't see your ship
+// TODO: Add option to drag and drop ships
