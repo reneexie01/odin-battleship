@@ -79,7 +79,7 @@ const DomManager = () => {
         return playerTurn;
     }
 
-    return { createGameboard, attackShip, getPlayerTurn, turnSwitcher }
+    return { createGameboard, renderBoardShots, attackShip, getPlayerTurn, turnSwitcher }
 }
 
 // TODO: Add option to drag and drop ships

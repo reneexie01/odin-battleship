@@ -1,6 +1,7 @@
 import "./styles.css";
 import { Player } from "./player.js";
 import { DomManager } from "./domManager.js";
+import { ComputerPlayer } from "./player-1-computer.js";
 
 const domManager = DomManager();
 
@@ -23,12 +24,6 @@ const player2 = Player('player2');
 domManager.createGameboard(player1Gameboard, 'player1');
 domManager.createGameboard(player2Gameboard, 'player2');
 
-// domManager.renderPlayerShips(player1);
-// domManager.renderPlayerShips(player2);
-
-// domManager.attackShip(player1Gameboard, player1);
-// domManager.attackShip(player2Gameboard, player2);
-
 function startGame() {
     startGameButton.addEventListener('click', () => {
         startGameButton.classList.add('hidden');
@@ -46,15 +41,20 @@ function switchPlayer() {
         if (turn === 1) {
             player1Container.classList.add('hidden');
             player2Container.classList.remove('hidden');
-            playerTurnText.innerHTML = `Player 1's turn`
-            domManager.attackShip(player2Gameboard, player2);
+            playerTurnText.innerHTML = `Player 1's turn (Computer)`
+            // domManager.attackShip(player2Gameboard, player2); // TODO: Fix this as it does not work - computer generated coordinates.
+            ComputerPlayer().computerAttackShip(player2, domManager);
             winnerChecker();
+            console.log(player1.gameboard.array)
+            console.log(player2.gameboard.array)
         } else if (turn === 2) {
             player2Container.classList.add('hidden');
             player1Container.classList.remove('hidden');
             playerTurnText.innerHTML = `Player 2's turn`
             domManager.attackShip(player1Gameboard, player1);
             winnerChecker(); 
+            console.log(player1.gameboard.array)
+            console.log(player2.gameboard.array)
         }
     });
 }
@@ -77,5 +77,3 @@ function winnerChecker() {
 
 startGame();
 switchPlayer();
-
-// TODO: Create a turn controllers that removes the event listener from the board after the user makes a click
