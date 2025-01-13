@@ -16,22 +16,94 @@ const player2Container = document.querySelector('.player2-container');
 const player1Gameboard = document.querySelector('.player1-gameboard');
 const player2Gameboard = document.querySelector('.player2-gameboard');
 
+// Carrier starting elements
+const carrierElement = document.querySelector('.player1-carrier');
+const carrierRow = document.querySelector('#carrier-row');
+const carrierColumn = document.querySelector('#carrier-column');
+const carrierDirection = document.querySelector('#carrier-direction');
+
+// Battleship starting elements
+const battleshipElement = document.querySelector('.player1-battleship');
+const battleshipRow = document.querySelector('#battleship-row');
+const battleshipColumn = document.querySelector('#battleship-column');
+const battleshipDirection = document.querySelector('#battleship-direction');
+
+// Cruiser starting elements
+const cruiserElement = document.querySelector('.player1-cruiser');
+const cruiserRow = document.querySelector('#cruiser-row');
+const cruiserColumn = document.querySelector('#cruiser-column');
+const cruiserDirection = document.querySelector('#cruiser-direction');
+
+// Submarine starting elements
+const submarineElement = document.querySelector('.player1-submarine');
+const submarineRow = document.querySelector('#submarine-row');
+const submarineColumn = document.querySelector('#submarine-column');
+const submarineDirection = document.querySelector('#submarine-direction');
+
+// Destroyer starting elements
+const destroyerElement = document.querySelector('.player1-destroyer');
+const destroyerRow = document.querySelector('#destroyer-row');
+const destroyerColumn = document.querySelector('#destroyer-column');
+const destroyerDirection = document.querySelector('#destroyer-direction');
+
+const errorCoordinatesExceed = document.querySelector('.submission-error-coordinates-exceed');
+const errorCoordinatesOverlapping = document.querySelector('.submission-error-coordinates-overlapping');
 const switchPlayerButton = document.querySelector('.switch-player');
 
-const player1 = Player('player1');
-const player2 = Player('player2');
+let player1;
+let player2;
 
+// Generating player1 ships DOM (when initially placing ships)
+domManager.shipGenerator(5, carrierElement, 'carrier');
+domManager.shipGenerator(4, battleshipElement, 'battleship');
+domManager.shipGenerator(3, cruiserElement, 'cruiser');
+domManager.shipGenerator(3, submarineElement, 'submarine');
+domManager.shipGenerator(2, destroyerElement, 'destroyer');
+
+// TODO: Generating DOM gameboard for ship placement
+
+// Generating gameboards on DOM
 domManager.createGameboard(player1Gameboard, 'player1');
 domManager.createGameboard(player2Gameboard, 'player2');
 
 function startGame() {
     startGameButton.addEventListener('click', () => {
-        startGameButton.classList.add('hidden');
-        playerTurnAnnouncement.classList.remove('hidden');
-        player1Container.classList.remove('hidden');
-        switchPlayerButton.classList.remove('hidden');
-        domManager.attackShip(player1Gameboard, player1);
-        playerTurnText.innerHTML = `Player 2's turn (You)`;
+
+        // TODO: Validation for two ships in the same coordinates/overlapping
+        const carrierCoordinates = [carrierRow.value, carrierColumn.value, carrierDirection.value];
+        const battleshipCoordinates = [battleshipRow.value, battleshipColumn.value, battleshipDirection.value];
+        const cruiserCoordinates = [cruiserRow.value, cruiserColumn.value, cruiserDirection.value];
+        const submarineCoordinates = [submarineRow.value, submarineColumn.value, submarineDirection.value];
+        const destroyerCoordinates = [destroyerRow.value, destroyerColumn.value, destroyerDirection.value];
+
+        if (
+            carrierCoordinates[0] < 0 || carrierCoordinates[0] > 9 ||
+            carrierCoordinates[1] < 0 || carrierCoordinates[1] > 9 ||
+            battleshipCoordinates[0] < 0 || battleshipCoordinates[0] > 9 ||
+            battleshipCoordinates[1] < 0 || battleshipCoordinates[1] > 9 ||
+            cruiserCoordinates[0] < 0 || cruiserCoordinates[0] > 9 ||
+            cruiserCoordinates[1] < 0 || cruiserCoordinates[1] > 9 ||
+            submarineCoordinates[0] < 0 || submarineCoordinates[0] > 9 ||
+            submarineCoordinates[1] < 0 || submarineCoordinates[1] > 9 ||
+            destroyerCoordinates[0] < 0 || destroyerCoordinates[0] > 9 ||
+            destroyerCoordinates[1] < 0 || destroyerCoordinates[1] > 9
+        ) {
+            errorCoordinatesExceed.classList.remove('hidden');
+            return;
+        } else {
+            player1 = Player('player1', carrierCoordinates, battleshipCoordinates, cruiserCoordinates, submarineCoordinates, destroyerCoordinates);
+            player2 = Player('player2', carrierCoordinates, battleshipCoordinates, cruiserCoordinates, submarineCoordinates, destroyerCoordinates); // TODO: Need to generate this randomly for computer
+            console.log(player1);
+
+            errorCoordinatesExceed.classList.add('hidden');
+    
+            startGameButton.classList.add('hidden');
+            playerTurnAnnouncement.classList.remove('hidden');
+            player1Container.classList.remove('hidden');
+            switchPlayerButton.classList.remove('hidden');
+            domManager.attackShip(player1Gameboard, player1);
+            playerTurnText.innerHTML = `Player 2's turn (You)`;
+        }
     })
 }
 
@@ -56,7 +128,7 @@ function switchPlayer() {
             console.log(player2.gameboard.array)
         }
     });
-} // TOFIX: If you click switch player multiple times, it allows you to hit the board multiple times
+} // TOFIX: If you click switch player multiple times, it allows you to hit the board multiple times maybe use { once }.
 
 function winnerChecker() {
     if (!player1.gameboard.fleetStatus) {
@@ -64,11 +136,13 @@ function winnerChecker() {
         winningAnnouncement.classList.remove('hidden');
         player1Container.classList.remove('hidden');
         player2Container.classList.remove('hidden');
+        switchPlayerButton.classList.add('hidden');
     } else if (!player2.gameboard.fleetStatus) {
         winningAnnouncement.innerHTML = 'Player 2 (You) Lost';
         winningAnnouncement.classList.remove('hidden');
         player1Container.classList.remove('hidden');
         player2Container.classList.remove('hidden');
+        switchPlayerButton.classList.add('hidden');
     } else {
         console.log('Both players active')
     }

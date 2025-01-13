@@ -3,11 +3,11 @@ import { Gameboard } from "./gameboard.js";
 
 export { Player };
 
-const Player = (name) => {
+const Player = (name, carrierCoordinates, battleshipCoordinates, cruiserCoordinates, submarineCoordinates, destroyerCoordinates) => {
     const player = {
         id: toolsManager.generateUniqueId(),
         name: name,
-        gameboard: Gameboard(),
+        gameboard: Gameboard(carrierCoordinates, battleshipCoordinates, cruiserCoordinates, submarineCoordinates, destroyerCoordinates),
     }
     
     return player;

@@ -6,7 +6,84 @@
     <title>Odin - Battleship</title>
 </head>
 <body>
-    <h1 class="winning-announcement hidden">Test</h1>
+    <div class="pre-game-container">
+        <h1>Place your ships:</h1>
+        <div class="submission-error-coordinates-exceed hidden">Coordinates for ships exceed the board boundaries. Coordinates must be between 0-9.</div>
+        <div class="submission-error-coordinates-overlapping hidden">Coordinates for ships are overlapping. Enter new coordinates for one or more of your ships.</div>
+        <div class="player1-fleet">
+            <div class="player1-carrier"></div>
+            <div class="coordinate-submission">
+                <label for="carrier-row">Row:</label>
+                <input type="text" id="carrier-row" value="9">
+                <label for="carrier-column">Column:</label>
+                <input type="text" id="carrier-column" value="9">
+                <label for="carrier-direction">Direction:</label>
+                <select name="directions" id="carrier-direction">
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="up" selected>Up</option>
+                    <option value="down">Down</option>
+                </select>
+            </div>
+            <div class="player1-battleship"></div>
+            <div class="coordinate-submission">
+                <label for="battleship-row">Row:</label>
+                <input type="text" id="battleship-row" value="9">
+                <label for="battleship-column">Column:</label>
+                <input type="text" id="battleship-column" value="8">
+                <label for="battleship-direction">Direction:</label>
+                <select name="directions" id="battleship-direction">
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="up" selected>Up</option>
+                    <option value="down">Down</option>
+                </select>
+            </div>
+            <div class="player1-cruiser"></div>
+            <div class="coordinate-submission">
+                <label for="cruiser-row">Row:</label>
+                <input type="text" id="cruiser-row" value="9">
+                <label for="cruiser-column">Column:</label>
+                <input type="text" id="cruiser-column" value="7">
+                <label for="cruiser-direction">Direction:</label>
+                <select name="directions" id="cruiser-direction">
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="up" selected>Up</option>
+                    <option value="down">Down</option>
+                </select>
+            </div>
+            <div class="player1-submarine"></div>
+            <div class="coordinate-submission">
+                <label for="submarine-row">Row:</label>
+                <input type="text" id="submarine-row" value="9">
+                <label for="submarine-column">Column:</label>
+                <input type="text" id="submarine-column" value="6">
+                <label for="submarine-direction">Direction:</label>
+                <select name="directions" id="submarine-direction">
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="up" selected>Up</option>
+                    <option value="down">Down</option>
+                </select>
+            </div>
+            <div class="player1-destroyer"></div>
+            <div class="coordinate-submission">
+                <label for="destroyer-row">Row:</label>
+                <input type="text" id="destroyer-row" value="9">
+                <label for="destroyer-column">Column:</label>
+                <input type="text" id="destroyer-column" value="5">
+                <label for="destroyer-direction">Direction:</label>
+                <select name="directions" id="destroyer-direction">
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                    <option value="up" selected>Up</option>
+                    <option value="down">Down</option>
+                </select>
+            </div>
+        </div>
+        <div class="player1-placement-gameboard"></div>
+    </div>
     <button class="start-game">Start Game</button>
     <div class="player-turn-announcement hidden">
         <h2>Current Player's Turn:</h2>
@@ -21,5 +98,6 @@
         <div class="player2-gameboard"></div>
     </div>
     <button class="switch-player hidden">Switch Player</button>
+    <h1 class="winning-announcement hidden"></h1>
 </body>
 </html>

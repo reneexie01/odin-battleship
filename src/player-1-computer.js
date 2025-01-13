@@ -3,9 +3,8 @@ export { ComputerPlayer };
 const ComputerPlayer = () => {
     
     function computerAttackShip(player, dom) {
-        let row = randomNumberGenerator(0,2)
-        let column = randomNumberGenerator(0,2)
-        console.log([row, column]);
+        let row = randomNumberGenerator(0,9)
+        let column = randomNumberGenerator(0,9)
         if (player.gameboard.array[row][column].shot) {
             console.log('Coordinates have already been shot... generating new numbers');
             computerAttackShip(player, dom);

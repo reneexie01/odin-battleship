@@ -16,23 +16,17 @@ const DomManager = () => {
             }
         }
     }
-    
-    /*
-    function renderPlayerShips(player) {
-        const gameboard = player.gameboard.array;
-        gameboard.forEach((row) => {
-            row.forEach((column) => {
-                if (column.id) {
-                    const cellRow = column.coordinates[0];
-                    const cellColumn = column.coordinates[1];
-    
-                    const occupiedCell = document.querySelector(`.${player.name}[row='${cellRow}'][column='${cellColumn}']`);
-                    occupiedCell.classList.add('occupied');
-                }
-            })
-        })
+
+    // TODO: Add option to drag and drop ships
+
+    function shipGenerator(num, el, type) {
+        for (let i = 0; i < num; i++) {
+            const cell = document.createElement('div');
+            cell.classList.add('cell')
+            cell.classList.add(`${type}`)
+            el.appendChild(cell);
+        }
     }
-    */
 
     function renderBoardShots(player) {
         const gameboard = player.gameboard.array;
@@ -63,7 +57,7 @@ const DomManager = () => {
             const row = e.target.getAttribute('row');
             const column = e.target.getAttribute('column');
             if (player.gameboard.array[row][column].shot) {
-                console.log('Coordinates have already been shot');
+                console.log('Coordinates have already been shot, try again.');
                 return;
             } else {
                 player.gameboard.receiveAttack([row, column]);
@@ -73,7 +67,7 @@ const DomManager = () => {
             }
         }
 
-      gameboard.addEventListener('click', attackHandler);
+        gameboard.addEventListener('click', attackHandler);
     }
 
     function turnSwitcher() {
@@ -84,7 +78,5 @@ const DomManager = () => {
         return playerTurn;
     }
 
-    return { createGameboard, renderBoardShots, attackShip, getPlayerTurn, turnSwitcher }
+    return { createGameboard, renderBoardShots, attackShip, getPlayerTurn, turnSwitcher, shipGenerator }
 }
-
-// TODO: Add option to drag and drop ships
