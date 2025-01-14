@@ -72,6 +72,7 @@ domManager.createGameboard(player2Gameboard, 'player2');
 function startGame() {
     startGameButton.addEventListener('click', () => {
 
+        // Human user pregame inputs //
         const carrierCoordinates = { coordinates: [Number(carrierRow.value), Number(carrierColumn.value)], direction: carrierDirection.value };
         const battleshipCoordinates = { coordinates: [Number(battleshipRow.value), Number(battleshipColumn.value)], direction: battleshipDirection.value };
         const cruiserCoordinates = { coordinates: [Number(cruiserRow.value), Number(cruiserColumn.value)], direction: cruiserDirection.value };
@@ -90,6 +91,11 @@ function startGame() {
         const newArray = [];
         flattenedArray.forEach((array) => newArray.push(JSON.stringify(array)))
         const duplicates = newArray.filter((item, index) => newArray.indexOf(item) !== index);
+
+        // Computer pregame inputs //
+        /* <------------------ TODO: Generate computer inputs  ---------------> */
+        
+        console.log(ComputerPlayer().randomDirectionGenerator())
 
         if ( // Validates all coordinates are within border boundaries
             carrierCoordinates.coordinates[0] < 0 || carrierCoordinates.coordinates[0] > 9 ||
@@ -110,7 +116,9 @@ function startGame() {
         } else {
 
             player1 = Player('player1', carrierCoordinates, battleshipCoordinates, cruiserCoordinates, submarineCoordinates, destroyerCoordinates);
-            player2 = Player('player2', carrierCoordinates, battleshipCoordinates, cruiserCoordinates, submarineCoordinates, destroyerCoordinates); // TODO: Need to generate this randomly for computer
+            player2 = Player('player2', carrierCoordinates, battleshipCoordinates, cruiserCoordinates, submarineCoordinates, destroyerCoordinates); 
+            // TODO: Need to generate this randomly for computer
+
             console.log(player1);
 
             pregamePlacement.classList.add('hidden');
