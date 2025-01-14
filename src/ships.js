@@ -1,5 +1,5 @@
 import { toolsManager } from "./tools.js";
-export { Ship };
+export { Ship, coordinates };
 
 const Ship = (name, length, [row, column], direction) => {
     let hits = 0;

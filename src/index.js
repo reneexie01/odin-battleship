@@ -2,6 +2,7 @@ import "./styles.css";
 import { Player } from "./player.js";
 import { DomManager } from "./domManager.js";
 import { ComputerPlayer } from "./player-1-computer.js";
+import { coordinates } from "./ships.js";
 
 const domManager = DomManager();
 
@@ -50,6 +51,8 @@ const errorCoordinatesExceed = document.querySelector('.submission-error-coordin
 const errorCoordinatesOverlapping = document.querySelector('.submission-error-coordinates-overlapping');
 const switchPlayerButton = document.querySelector('.switch-player');
 
+const pregamePlacement = document.querySelector('.pre-game-container');
+
 let player1;
 let player2;
 
@@ -69,33 +72,48 @@ domManager.createGameboard(player2Gameboard, 'player2');
 function startGame() {
     startGameButton.addEventListener('click', () => {
 
-        // TODO: Validation for two ships in the same coordinates/overlapping
-        const carrierCoordinates = [carrierRow.value, carrierColumn.value, carrierDirection.value];
-        const battleshipCoordinates = [battleshipRow.value, battleshipColumn.value, battleshipDirection.value];
-        const cruiserCoordinates = [cruiserRow.value, cruiserColumn.value, cruiserDirection.value];
-        const submarineCoordinates = [submarineRow.value, submarineColumn.value, submarineDirection.value];
-        const destroyerCoordinates = [destroyerRow.value, destroyerColumn.value, destroyerDirection.value];
+        const carrierCoordinates = { coordinates: [Number(carrierRow.value), Number(carrierColumn.value)], direction: carrierDirection.value };
+        const battleshipCoordinates = { coordinates: [Number(battleshipRow.value), Number(battleshipColumn.value)], direction: battleshipDirection.value };
+        const cruiserCoordinates = { coordinates: [Number(cruiserRow.value), Number(cruiserColumn.value)], direction: cruiserDirection.value };
+        const submarineCoordinates = { coordinates: [Number(submarineRow.value), Number(submarineColumn.value)], direction: submarineDirection.value };
+        const destroyerCoordinates = { coordinates: [Number(destroyerRow.value), Number(destroyerColumn.value)], direction: destroyerDirection.value };
 
-        if (
-            carrierCoordinates[0] < 0 || carrierCoordinates[0] > 9 ||
-            carrierCoordinates[1] < 0 || carrierCoordinates[1] > 9 ||
-            battleshipCoordinates[0] < 0 || battleshipCoordinates[0] > 9 ||
-            battleshipCoordinates[1] < 0 || battleshipCoordinates[1] > 9 ||
-            cruiserCoordinates[0] < 0 || cruiserCoordinates[0] > 9 ||
-            cruiserCoordinates[1] < 0 || cruiserCoordinates[1] > 9 ||
-            submarineCoordinates[0] < 0 || submarineCoordinates[0] > 9 ||
-            submarineCoordinates[1] < 0 || submarineCoordinates[1] > 9 ||
-            destroyerCoordinates[0] < 0 || destroyerCoordinates[0] > 9 ||
-            destroyerCoordinates[1] < 0 || destroyerCoordinates[1] > 9
+        // Validates that coordinates and directions inputted do not result in ships overlapping
+        const preCalculatedCoordinates = [];
+        preCalculatedCoordinates.push(coordinates(carrierCoordinates.coordinates, 5, carrierCoordinates.direction));
+        preCalculatedCoordinates.push(coordinates(battleshipCoordinates.coordinates, 4, battleshipCoordinates.direction));
+        preCalculatedCoordinates.push(coordinates(cruiserCoordinates.coordinates, 4, cruiserCoordinates.direction));
+        preCalculatedCoordinates.push(coordinates(submarineCoordinates.coordinates, 3, submarineCoordinates.direction));
+        preCalculatedCoordinates.push(coordinates(destroyerCoordinates.coordinates, 2, destroyerCoordinates.direction));
+        
+        const flattenedArray = preCalculatedCoordinates.flat();
+        const newArray = [];
+        flattenedArray.forEach((array) => newArray.push(JSON.stringify(array)))
+        const duplicates = newArray.filter((item, index) => newArray.indexOf(item) !== index);
+
+        if ( // Validates all coordinates are within border boundaries
+            carrierCoordinates.coordinates[0] < 0 || carrierCoordinates.coordinates[0] > 9 ||
+            carrierCoordinates.coordinates[1] < 0 || carrierCoordinates.coordinates[1] > 9 ||
+            battleshipCoordinates.coordinates[0] < 0 || battleshipCoordinates.coordinates[0] > 9 ||
+            battleshipCoordinates.coordinates[1] < 0 || battleshipCoordinates.coordinates[1] > 9 ||
+            cruiserCoordinates.coordinates[0] < 0 || cruiserCoordinates.coordinates[0] > 9 ||
+            cruiserCoordinates.coordinates[1] < 0 || cruiserCoordinates.coordinates[1] > 9 ||
+            submarineCoordinates.coordinates[0] < 0 || submarineCoordinates.coordinates[0] > 9 ||
+            submarineCoordinates.coordinates[1] < 0 || submarineCoordinates.coordinates[1] > 9 ||
+            destroyerCoordinates.coordinates[0] < 0 || destroyerCoordinates.coordinates[0] > 9 ||
+            destroyerCoordinates.coordinates[1] < 0 || destroyerCoordinates.coordinates[1] > 9
         ) {
             errorCoordinatesExceed.classList.remove('hidden');
             return;
+        } else if (duplicates.length !== 0) {
+            errorCoordinatesOverlapping.classList.remove('hidden');
         } else {
+
             player1 = Player('player1', carrierCoordinates, battleshipCoordinates, cruiserCoordinates, submarineCoordinates, destroyerCoordinates);
             player2 = Player('player2', carrierCoordinates, battleshipCoordinates, cruiserCoordinates, submarineCoordinates, destroyerCoordinates); // TODO: Need to generate this randomly for computer
             console.log(player1);
 
-            errorCoordinatesExceed.classList.add('hidden');
+            pregamePlacement.classList.add('hidden');
     
             startGameButton.classList.add('hidden');
             playerTurnAnnouncement.classList.remove('hidden');

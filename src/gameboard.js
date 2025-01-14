@@ -26,13 +26,6 @@ const Gameboard = (carrierCoordinates, battleshipCoordinates, cruiserCoordinates
             fleetStatusChecker(); // Notes: Checks if all ships in the fleet are sunk
         },
         fleetStatus: true,
-        coordinates: { // TODO: Eventually take these coordinates and input them into the Ship function for each ship. Index0 is row index1 is column index2 is direction.
-            carrier: [carrierCoordinates[0], carrierCoordinates[1], carrierCoordinates[2]],
-            battleship: [battleshipCoordinates[0], battleshipCoordinates[1], battleshipCoordinates[2]],
-            cruiser: [cruiserCoordinates[0], cruiserCoordinates[1], cruiserCoordinates[2]],
-            submarine: [submarineCoordinates[0], submarineCoordinates[1], submarineCoordinates[2]],
-            destroyer: [destroyerCoordinates[0], destroyerCoordinates[1], destroyerCoordinates[2]],
-        }
      }
      
     for (let i = 0; i < num; i++) {
@@ -61,11 +54,11 @@ const Gameboard = (carrierCoordinates, battleshipCoordinates, cruiserCoordinates
         }
     }
 
-    const carrier = Ship('carrier', 5, [carrierCoordinates[0], carrierCoordinates[1]], carrierCoordinates[2]);
-    const battleship = Ship('battleship', 4, [battleshipCoordinates[0], battleshipCoordinates[1]], battleshipCoordinates[2]);
-    const cruiser = Ship('cruiser', 3, [cruiserCoordinates[0], cruiserCoordinates[1]], cruiserCoordinates[2]);
-    const submarine = Ship('submarine', 3, [submarineCoordinates[0], submarineCoordinates[1]], submarineCoordinates[2]);
-    const destroyer = Ship('destroyer', 2, [destroyerCoordinates[0], destroyerCoordinates[1]], destroyerCoordinates[2]);
+    const carrier = Ship('carrier', 5, carrierCoordinates.coordinates, carrierCoordinates.direction);
+    const battleship = Ship('battleship', 4, battleshipCoordinates.coordinates, battleshipCoordinates.direction);
+    const cruiser = Ship('cruiser', 3, cruiserCoordinates.coordinates, cruiserCoordinates.direction);
+    const submarine = Ship('submarine', 3, submarineCoordinates.coordinates, submarineCoordinates.direction);
+    const destroyer = Ship('destroyer', 2, destroyerCoordinates.coordinates, destroyerCoordinates.direction);
 
     gameboard.playerFleet = [
         carrier,
