@@ -1,4 +1,4 @@
-.player1-gameboard, .player2-gameboard {
+.player1-gameboard, .player2-gameboard, .pregame-player2-gameboard {
     display: flex;
     flex-wrap: wrap;
     border: 1px solid black;
@@ -24,11 +24,15 @@
     background-color: gray;
 }
 
+.preview {
+    background-color: green;
+}
+
 .hidden {
     display: none;
 }
 
-.player1-fleet {
+.player2-fleet {
     display: flex;
     margin-bottom: 10px;
 }
@@ -45,4 +49,8 @@ input {
 
 input {
     max-width: 30px;
+}
+
+button {
+    margin-top: 10px;
 }

@@ -74,8 +74,6 @@ const Gameboard = (carrierCoordinates, battleshipCoordinates, cruiserCoordinates
     addToBoard(gameboard, submarine);
     addToBoard(gameboard, destroyer);
 
-//TODO: Place ships generated on the board and validate if the coordinates are within the bounds of the board.
-
     return gameboard;
 }
 
@@ -88,7 +86,7 @@ function addToBoard(gameboard, ship) {
 
     if (occupied) {
         console.log(`${ship.name} ${ship.id} has not been added.`)
-        return; // Notes: Does not add the ship to the board if any of the coordinates are occupied
+        return; // Does not add the ship to the board if any of the coordinates are occupied
     } else {
         coordinates.forEach((coordinate) => {
             let gameboardCoordinate = gameboard.array[coordinate[0]][coordinate[1]];

@@ -7,6 +7,7 @@ import { coordinates } from "./ships.js";
 const domManager = DomManager();
 
 const startGameButton = document.querySelector('.start-game');
+const previewGameboardButton = document.querySelector('.preview-player2-gameboard');
 const playerTurnAnnouncement = document.querySelector('.player-turn-announcement');
 const playerTurnText = document.querySelector('.player-turn');
 const winningAnnouncement = document.querySelector('.winning-announcement');
@@ -18,31 +19,31 @@ const player1Gameboard = document.querySelector('.player1-gameboard');
 const player2Gameboard = document.querySelector('.player2-gameboard');
 
 // Carrier starting elements
-const carrierElement = document.querySelector('.player1-carrier');
+const carrierElement = document.querySelector('.player2-carrier');
 const carrierRow = document.querySelector('#carrier-row');
 const carrierColumn = document.querySelector('#carrier-column');
 const carrierDirection = document.querySelector('#carrier-direction');
 
 // Battleship starting elements
-const battleshipElement = document.querySelector('.player1-battleship');
+const battleshipElement = document.querySelector('.player2-battleship');
 const battleshipRow = document.querySelector('#battleship-row');
 const battleshipColumn = document.querySelector('#battleship-column');
 const battleshipDirection = document.querySelector('#battleship-direction');
 
 // Cruiser starting elements
-const cruiserElement = document.querySelector('.player1-cruiser');
+const cruiserElement = document.querySelector('.player2-cruiser');
 const cruiserRow = document.querySelector('#cruiser-row');
 const cruiserColumn = document.querySelector('#cruiser-column');
 const cruiserDirection = document.querySelector('#cruiser-direction');
 
 // Submarine starting elements
-const submarineElement = document.querySelector('.player1-submarine');
+const submarineElement = document.querySelector('.player2-submarine');
 const submarineRow = document.querySelector('#submarine-row');
 const submarineColumn = document.querySelector('#submarine-column');
 const submarineDirection = document.querySelector('#submarine-direction');
 
 // Destroyer starting elements
-const destroyerElement = document.querySelector('.player1-destroyer');
+const destroyerElement = document.querySelector('.player2-destroyer');
 const destroyerRow = document.querySelector('#destroyer-row');
 const destroyerColumn = document.querySelector('#destroyer-column');
 const destroyerDirection = document.querySelector('#destroyer-direction');
@@ -51,6 +52,7 @@ const errorCoordinatesExceed = document.querySelector('.submission-error-coordin
 const errorCoordinatesOverlapping = document.querySelector('.submission-error-coordinates-overlapping');
 const switchPlayerButton = document.querySelector('.switch-player');
 
+const pregamePlayer2Gameboard = document.querySelector('.pregame-player2-gameboard');
 const pregamePlacement = document.querySelector('.pre-game-container');
 
 let player1;
@@ -63,11 +65,51 @@ domManager.shipGenerator(3, cruiserElement, 'cruiser');
 domManager.shipGenerator(3, submarineElement, 'submarine');
 domManager.shipGenerator(2, destroyerElement, 'destroyer');
 
-// TODO: Generating DOM gameboard for ship placement
-
 // Generating gameboards on DOM
 domManager.createGameboard(player1Gameboard, 'player1');
 domManager.createGameboard(player2Gameboard, 'player2');
+domManager.createGameboard(pregamePlayer2Gameboard, 'pregame-player2');
+
+// Generating DOM gameboard for ship placement
+function previewGameboard() {
+    previewGameboardButton.addEventListener('click', () => {
+        let coordinatesArray = [];
+        removeClass('preview','pregame-player2');
+        const carrierCoordinates = { coordinates: [Number(carrierRow.value), Number(carrierColumn.value)], direction: carrierDirection.value };
+        const battleshipCoordinates = { coordinates: [Number(battleshipRow.value), Number(battleshipColumn.value)], direction: battleshipDirection.value };
+        const cruiserCoordinates = { coordinates: [Number(cruiserRow.value), Number(cruiserColumn.value)], direction: cruiserDirection.value };
+        const submarineCoordinates = { coordinates: [Number(submarineRow.value), Number(submarineColumn.value)], direction: submarineDirection.value };
+        const destroyerCoordinates = { coordinates: [Number(destroyerRow.value), Number(destroyerColumn.value)], direction: destroyerDirection.value };
+
+        const humanFleet = { carrier: carrierCoordinates, battleship: battleshipCoordinates, cruiser: cruiserCoordinates, submarine: submarineCoordinates, destroyer: destroyerCoordinates };
+
+        let player2Duplicates = validateNotOverlapping(humanFleet.carrier, humanFleet.battleship, humanFleet.cruiser, humanFleet.submarine, humanFleet.destroyer);
+        let player2WithinBoundaries = validateWithinBoundaries(humanFleet.carrier, humanFleet.battleship, humanFleet.cruiser, humanFleet.submarine, humanFleet.destroyer);
+        const coordinates = preCalculateCoordinates(humanFleet.carrier, humanFleet.battleship, humanFleet.cruiser, humanFleet.submarine, humanFleet.destroyer)
+
+        if (!player2WithinBoundaries) {
+            errorCoordinatesExceed.classList.remove('hidden');
+            return;
+        } else if (player2Duplicates.length !== 0) {
+            errorCoordinatesOverlapping.classList.remove('hidden');
+        } else {
+            coordinatesArray = coordinates.flat();
+            coordinatesArray.forEach((coordinate) => {
+                const cellRow = coordinate[0];
+                const cellColumn = coordinate[1];
+                const cell = document.querySelector(`.pregame-player2[row='${cellRow}'][column='${cellColumn}']`);
+                cell.classList.add('preview');
+            })
+        }
+    })
+}
+
+function removeClass(cl, element) {
+    const elements = document.querySelectorAll(`.${element}`);
+    elements.forEach((element) => {
+        element.classList.remove(`${cl}`);
+    })
+}
 
 function startGame() {
     startGameButton.addEventListener('click', () => {
@@ -201,5 +243,6 @@ function winnerChecker() {
     }
 }
 
+previewGameboard();
 startGame();
 switchPlayer();

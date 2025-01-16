@@ -10,8 +10,8 @@
         <h1>Place your ships:</h1>
         <div class="submission-error-coordinates-exceed hidden">Coordinates for ships exceed the board boundaries. Coordinates must be between 0-9.</div>
         <div class="submission-error-coordinates-overlapping hidden">Coordinates for ships are overlapping. Enter new coordinates for one or more of your ships.</div>
-        <div class="player1-fleet">
-            <div class="player1-carrier"></div>
+        <div class="player2-fleet">
+            <div class="player2-carrier"></div>
             <div class="coordinate-submission">
                 <label for="carrier-row">Row:</label>
                 <input type="number" id="carrier-row" value=9>
@@ -25,7 +25,7 @@
                     <option value="down">Down</option>
                 </select>
             </div>
-            <div class="player1-battleship"></div>
+            <div class="player2-battleship"></div>
             <div class="coordinate-submission">
                 <label for="battleship-row">Row:</label>
                 <input type="number" id="battleship-row" value=9>
@@ -39,7 +39,7 @@
                     <option value="down">Down</option>
                 </select>
             </div>
-            <div class="player1-cruiser"></div>
+            <div class="player2-cruiser"></div>
             <div class="coordinate-submission">
                 <label for="cruiser-row">Row:</label>
                 <input type="number" id="cruiser-row" value=9>
@@ -53,7 +53,7 @@
                     <option value="down">Down</option>
                 </select>
             </div>
-            <div class="player1-submarine"></div>
+            <div class="player2-submarine"></div>
             <div class="coordinate-submission">
                 <label for="submarine-row">Row:</label>
                 <input type="number" id="submarine-row" value=9>
@@ -67,7 +67,7 @@
                     <option value="down">Down</option>
                 </select>
             </div>
-            <div class="player1-destroyer"></div>
+            <div class="player2-destroyer"></div>
             <div class="coordinate-submission">
                 <label for="destroyer-row">Row:</label>
                 <input type="number" id="destroyer-row" value=9>
@@ -82,8 +82,9 @@
                 </select>
             </div>
         </div>
-        <div class="player1-placement-gameboard"></div>
+        <div class="pregame-player2-gameboard"></div>
     </div>
+    <button class="preview-player2-gameboard">Preview Gameboard</button>
     <button class="start-game">Start Game</button>
     <div class="player-turn-announcement hidden">
         <h2>Current Player's Turn:</h2>
